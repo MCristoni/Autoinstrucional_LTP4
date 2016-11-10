@@ -6,11 +6,15 @@
 package Telas;
 
 //import Utilitarios.HintTextFieldUI;
+import banco.Banco;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.GhostText;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import utilitarios.LtpUtil;
 
 /**
  *
@@ -31,6 +35,7 @@ public class TelaCliente extends javax.swing.JFrame
         jPanel1.requestFocusInWindow();
         GhostText gt = new GhostText(campoPesquisaCliente, "Código ou nome do cliente");
         menuBarCliente.add(btnIncluirCliente);
+        menuBarCliente.add(btnExcluirCliente);
     }
 
     /**
@@ -43,29 +48,44 @@ public class TelaCliente extends javax.swing.JFrame
     private void initComponents() {
 
         btnIncluirCliente = new javax.swing.JButton();
+        btnExcluirCliente = new javax.swing.JButton();
         btnPesquisaCliente = new javax.swing.JButton();
         campoPesquisaCliente = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTablePesq = new javax.swing.JTable();
         menuBarCliente = new javax.swing.JMenuBar();
 
-        btnIncluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/user.png"))); // NOI18N
+        btnIncluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/userIncluir.png"))); // NOI18N
         btnIncluirCliente.setActionCommand("  Incluir");
-        btnIncluirCliente.setDisabledIcon(null);
-        btnIncluirCliente.setDisabledSelectedIcon(null);
         btnIncluirCliente.setLabel("  Incluir");
         btnIncluirCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
-        btnIncluirCliente.setMaximumSize(new java.awt.Dimension(84, 29));
-        btnIncluirCliente.setMinimumSize(new java.awt.Dimension(84, 29));
-        btnIncluirCliente.setPreferredSize(new java.awt.Dimension(84, 29));
+        btnIncluirCliente.setMaximumSize(new java.awt.Dimension(84, 35));
+        btnIncluirCliente.setMinimumSize(new java.awt.Dimension(84, 35));
+        btnIncluirCliente.setPreferredSize(new java.awt.Dimension(84, 35));
         btnIncluirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIncluirClienteActionPerformed(evt);
             }
         });
 
+        btnExcluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/userExcluir.png"))); // NOI18N
+        btnExcluirCliente.setText("  Excluir");
+        btnExcluirCliente.setActionCommand("  Incluir");
+        btnExcluirCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
+        btnExcluirCliente.setMaximumSize(new java.awt.Dimension(84, 35));
+        btnExcluirCliente.setMinimumSize(new java.awt.Dimension(84, 35));
+        btnExcluirCliente.setPreferredSize(new java.awt.Dimension(84, 35));
+        btnExcluirCliente.setVerifyInputWhenFocusTarget(false);
+        btnExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirClienteActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu Clientes");
-        setPreferredSize(new java.awt.Dimension(576, 450));
+        setPreferredSize(new java.awt.Dimension(907, 452));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -85,6 +105,12 @@ public class TelaCliente extends javax.swing.JFrame
             }
         });
 
+        campoPesquisaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoPesquisaClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,20 +122,50 @@ public class TelaCliente extends javax.swing.JFrame
             .addGap(0, 16, Short.MAX_VALUE)
         );
 
+        jTablePesq.setFont(new java.awt.Font("Lucida Grande", 0, 13)); // NOI18N
+        jTablePesq.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CÓDIGO", "NOME", "ENDEREÇO", "BAIRRO", "CIDADE", "UF", "CEP", "TELEFONE", "EMAIL", "DATA"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTablePesq.setRowHeight(20);
+        jTablePesq.setShowHorizontalLines(true);
+        jScrollPane2.setViewportView(jTablePesq);
+        if (jTablePesq.getColumnModel().getColumnCount() > 0) {
+            jTablePesq.getColumnModel().getColumn(0).setResizable(false);
+            jTablePesq.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTablePesq.getColumnModel().getColumn(5).setPreferredWidth(30);
+        }
+
+        menuBarCliente.setName(""); // NOI18N
         setJMenuBar(menuBarCliente);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addComponent(campoPesquisaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                        .addComponent(campoPesquisaCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
                         .addGap(7, 7, 7)
                         .addComponent(btnPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,7 +178,9 @@ public class TelaCliente extends javax.swing.JFrame
                             .addComponent(btnPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(campoPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -137,9 +195,11 @@ public class TelaCliente extends javax.swing.JFrame
     private void btnIncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirClienteActionPerformed
         if (!mostrandoTelaIncluirCliente) 
         {
-            try {
+            try 
+            {
                 new TelaClienteIncluir().setVisible(true);
-            } catch (ParseException ex) {
+            } catch (ParseException ex) 
+            {
                 Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
             mostrandoTelaIncluirCliente = true;
@@ -154,6 +214,37 @@ public class TelaCliente extends javax.swing.JFrame
         //Quando a tela de Clientes for fechada, mudar a flag que evita a abertura de várias para falso.
         TelaPrincipal.mostrandoTelaClientes = false;
     }//GEN-LAST:event_formWindowClosed
+
+    private void campoPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaClienteActionPerformed
+        if (campoPesquisaCliente.getText().equalsIgnoreCase("Código ou nome do cliente")) 
+        {
+            campoPesquisaCliente.setText("");
+        }
+        try
+        {
+            ResultSet resp = Banco.buscarClientesPorNome(campoPesquisaCliente.getText());
+            LtpUtil.loadFormatJTable(jScrollPane1, resp);
+            DefaultTableModel dm = (DefaultTableModel)jTablePesq.getModel();
+            int tot = 0;
+            while (resp.next()) 
+            {
+                dm.addRow(new String[]{resp.getString("CODCLIENTE"), resp.getString("NOME"), resp.getString("ENDERECO"), resp.getString("BAIRRO"), resp.getString("CIDADE"), resp.getString("UF"), resp.getString("CEP"), resp.getString("TELEFONE"), resp.getString("E_MAIL"), resp.getString("DATA_CAD_CLIENTE")});
+                tot++;
+            }
+            if (tot==0)
+            {
+                if (dm.getRowCount()>0) while (dm.getRowCount()>0) dm.removeRow(0);
+                JOptionPane.showMessageDialog(this, "NENHUM CLIENTE ENCONTRADO!");
+            }
+        } catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_campoPesquisaClienteActionPerformed
+
+    private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,10 +288,14 @@ public class TelaCliente extends javax.swing.JFrame
     public static boolean mostrandoTelaIncluirCliente = false;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExcluirCliente;
     private javax.swing.JButton btnIncluirCliente;
     private javax.swing.JButton btnPesquisaCliente;
     private javax.swing.JTextField campoPesquisaCliente;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTablePesq;
     private javax.swing.JMenuBar menuBarCliente;
     // End of variables declaration//GEN-END:variables
 }

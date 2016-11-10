@@ -74,4 +74,11 @@ public class Banco
         sql.setDate(9, cliente.getData());
         sql.executeUpdate();
     }
+    
+    public static ResultSet buscarClientesPorNome (String Cliente) throws SQLException 
+    {
+        PreparedStatement pstm = con.prepareStatement("Select CODCLIENTE \"CÓDIGO\", NOME, ENDERECO \"ENDEREÇO\", BAIRRO, CIDADE, UF, CEP, TELEFONE, E_MAIL \"EMAIL\", DATA_CAD_CLIENTE \"DATA\" from CLIENTES where upper(NOME) like ? order by NOME");
+        pstm.setString( 1, "%" + Cliente.trim().toUpperCase() + "%" );
+        return pstm.executeQuery();
+    }
 }
