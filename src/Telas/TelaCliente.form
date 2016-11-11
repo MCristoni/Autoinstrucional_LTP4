@@ -7,7 +7,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagens/userIncluir.png"/>
         </Property>
-        <Property name="actionCommand" type="java.lang.String" value="  Incluir"/>
+        <Property name="actionCommand" type="java.lang.String" value="Incluir"/>
         <Property name="label" type="java.lang.String" value="  Incluir"/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[0, -10, 0, -5]"/>
@@ -32,7 +32,7 @@
           <Image iconType="3" name="/imagens/userExcluir.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="  Excluir"/>
-        <Property name="actionCommand" type="java.lang.String" value="  Incluir"/>
+        <Property name="actionCommand" type="java.lang.String" value="Excluir"/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[0, -10, 0, -5]"/>
         </Property>
@@ -45,7 +45,6 @@
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[84, 35]"/>
         </Property>
-        <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirClienteActionPerformed"/>

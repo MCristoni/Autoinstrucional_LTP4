@@ -59,7 +59,7 @@ public class TelaCliente extends javax.swing.JFrame
         menuBarCliente = new javax.swing.JMenuBar();
 
         btnIncluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/userIncluir.png"))); // NOI18N
-        btnIncluirCliente.setActionCommand("  Incluir");
+        btnIncluirCliente.setActionCommand("Incluir");
         btnIncluirCliente.setLabel("  Incluir");
         btnIncluirCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
         btnIncluirCliente.setMaximumSize(new java.awt.Dimension(84, 35));
@@ -73,12 +73,11 @@ public class TelaCliente extends javax.swing.JFrame
 
         btnExcluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/userExcluir.png"))); // NOI18N
         btnExcluirCliente.setText("  Excluir");
-        btnExcluirCliente.setActionCommand("  Incluir");
+        btnExcluirCliente.setActionCommand("Excluir");
         btnExcluirCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
         btnExcluirCliente.setMaximumSize(new java.awt.Dimension(84, 35));
         btnExcluirCliente.setMinimumSize(new java.awt.Dimension(84, 35));
         btnExcluirCliente.setPreferredSize(new java.awt.Dimension(84, 35));
-        btnExcluirCliente.setVerifyInputWhenFocusTarget(false);
         btnExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirClienteActionPerformed(evt);
@@ -218,19 +217,19 @@ public class TelaCliente extends javax.swing.JFrame
     private void campoPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaClienteActionPerformed
         if (campoPesquisaCliente.getText().equalsIgnoreCase("Código ou nome do cliente") || campoPesquisaCliente.getText().equalsIgnoreCase("")) 
         {
-            campoPesquisaCliente.setText("");
             try
             {
                 Banco.abrirConexao();
-                ResultSet resp = Banco.buscarClientesPorNome(campoPesquisaCliente.getText());
-                LtpUtil.loadFormatJTable(jScrollPane2, resp);
+                ResultSet resp = Banco.buscarClientesPorNome("");
+                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
                 Banco.fecharConexao();
-            } catch (SQLException | LtpUtilException e)
+            } 
+            catch (SQLException | LtpUtilException e)
             {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
         }
-        if (soNumericos(campoPesquisaCliente.getText().toUpperCase()) == true)
+        else if (soNumericos(campoPesquisaCliente.getText().toUpperCase()) == true)
         {
             try
             {
@@ -250,9 +249,10 @@ public class TelaCliente extends javax.swing.JFrame
             {
                 Banco.abrirConexao();
                 ResultSet resp = Banco.buscarClientesPorNome(campoPesquisaCliente.getText());
-                LtpUtil.loadFormatJTable(jScrollPane2, resp);
+                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
                 Banco.fecharConexao();
-            } catch (SQLException | LtpUtilException e)
+            } 
+            catch (SQLException | LtpUtilException e)
             {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -320,7 +320,7 @@ public class TelaCliente extends javax.swing.JFrame
     {
         for (int i = 0; i < validacao.length(); i++)
         {
-            if(validacao.charAt(i) <= 48 || validacao.charAt(i) >= 57)
+            if(validacao.charAt(i) < 48 || validacao.charAt(i) > 57)
             {
                 return false;
             }
