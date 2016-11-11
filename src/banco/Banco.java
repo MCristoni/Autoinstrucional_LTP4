@@ -17,7 +17,7 @@ public class Banco
     public static void abrirConexao() throws SQLException
     {
             DriverManager.registerDriver(new FBDriver());
-            con = DriverManager.getConnection("jdbc:firebirdsql:DesktopMatheus:E:\\Auto Instrucional TLP4\\banco\\Win\\BDVendas.GDB",
+            con = DriverManager.getConnection("jdbc:firebirdsql:Matheus:/Users/usuario/Desktop/Auto Instrucional TLP4/Banco/Mac/BDVENDAS.GDB",
                             "SYSDBA", "masterkey");
             System.err.println("Conexao aberta");
     }
@@ -75,10 +75,17 @@ public class Banco
         sql.executeUpdate();
     }
     
-    public static ResultSet buscarClientesPorNome (String Cliente) throws SQLException 
+    public static ResultSet buscarClientesPorNome (String cliente) throws SQLException 
     {
-        PreparedStatement pstm = con.prepareStatement("Select CODCLIENTE \"CÓDIGO\", NOME, ENDERECO \"ENDEREÇO\", BAIRRO, CIDADE, UF, CEP, TELEFONE, E_MAIL \"EMAIL\", DATA_CAD_CLIENTE \"DATA\" from CLIENTES where upper(NOME) like ? order by NOME");
-        pstm.setString( 1, "%" + Cliente.trim().toUpperCase() + "%" );
+        PreparedStatement pstm = con.prepareStatement("Select * from CLIENTES where NOME like ? order by NOME ASC");
+        pstm.setString( 1, "%" + cliente.toUpperCase() + "%" );
+        return pstm.executeQuery();
+    }
+    
+    public static ResultSet buscarClientesPorCod (int cod) throws SQLException 
+    {
+        PreparedStatement pstm = con.prepareStatement("Select * from CLIENTES where CODCLIENTE like ?");
+        pstm.setInt(1, cod);
         return pstm.executeQuery();
     }
 }

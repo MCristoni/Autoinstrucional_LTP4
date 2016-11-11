@@ -8,6 +8,7 @@ package Telas;
 //import Utilitarios.HintTextFieldUI;
 import banco.Banco;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ import util.GhostText;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utilitarios.LtpUtil;
+import utilitarios.LtpUtilException;
 
 /**
  *
@@ -93,7 +95,6 @@ public class TelaCliente extends javax.swing.JFrame
             }
         });
 
-        btnPesquisaCliente.setFont(new java.awt.Font("Lucida Grande", 0, 13)); // NOI18N
         btnPesquisaCliente.setText("Pesquisar");
         btnPesquisaCliente.setMargin(new java.awt.Insets(0, -2, 0, -2));
         btnPesquisaCliente.setMaximumSize(new java.awt.Dimension(104, 29));
@@ -140,7 +141,6 @@ public class TelaCliente extends javax.swing.JFrame
             }
         });
         jTablePesq.setRowHeight(20);
-        jTablePesq.setShowHorizontalLines(true);
         jScrollPane2.setViewportView(jTablePesq);
         if (jTablePesq.getColumnModel().getColumnCount() > 0) {
             jTablePesq.getColumnModel().getColumn(0).setResizable(false);
@@ -216,30 +216,48 @@ public class TelaCliente extends javax.swing.JFrame
     }//GEN-LAST:event_formWindowClosed
 
     private void campoPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaClienteActionPerformed
-        if (campoPesquisaCliente.getText().equalsIgnoreCase("Código ou nome do cliente")) 
+        if (campoPesquisaCliente.getText().equalsIgnoreCase("Código ou nome do cliente") || campoPesquisaCliente.getText().equalsIgnoreCase("")) 
         {
             campoPesquisaCliente.setText("");
-        }
-        try
-        {
-            ResultSet resp = Banco.buscarClientesPorNome(campoPesquisaCliente.getText());
-            LtpUtil.loadFormatJTable(jScrollPane1, resp);
-            DefaultTableModel dm = (DefaultTableModel)jTablePesq.getModel();
-            int tot = 0;
-            while (resp.next()) 
+            try
             {
-                dm.addRow(new String[]{resp.getString("CODCLIENTE"), resp.getString("NOME"), resp.getString("ENDERECO"), resp.getString("BAIRRO"), resp.getString("CIDADE"), resp.getString("UF"), resp.getString("CEP"), resp.getString("TELEFONE"), resp.getString("E_MAIL"), resp.getString("DATA_CAD_CLIENTE")});
-                tot++;
-            }
-            if (tot==0)
+                Banco.abrirConexao();
+                ResultSet resp = Banco.buscarClientesPorNome(campoPesquisaCliente.getText());
+                LtpUtil.loadFormatJTable(jScrollPane2, resp);
+                Banco.fecharConexao();
+            } catch (SQLException | LtpUtilException e)
             {
-                if (dm.getRowCount()>0) while (dm.getRowCount()>0) dm.removeRow(0);
-                JOptionPane.showMessageDialog(this, "NENHUM CLIENTE ENCONTRADO!");
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
-        } catch (Exception e)
-        {
-            JOptionPane.showMessageDialog(this, e.getMessage());
         }
+        if (soNumericos(campoPesquisaCliente.getText().toUpperCase()) == true)
+        {
+            try
+            {
+                Banco.abrirConexao();
+                ResultSet resp = Banco.buscarClientesPorCod(Integer.parseInt(campoPesquisaCliente.getText()));
+                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
+                Banco.fecharConexao();
+            }
+            catch (SQLException | LtpUtilException e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }
+        else
+        {
+            try
+            {
+                Banco.abrirConexao();
+                ResultSet resp = Banco.buscarClientesPorNome(campoPesquisaCliente.getText());
+                LtpUtil.loadFormatJTable(jScrollPane2, resp);
+                Banco.fecharConexao();
+            } catch (SQLException | LtpUtilException e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }
+        
     }//GEN-LAST:event_campoPesquisaClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
@@ -293,9 +311,20 @@ public class TelaCliente extends javax.swing.JFrame
     private javax.swing.JButton btnPesquisaCliente;
     private javax.swing.JTextField campoPesquisaCliente;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTablePesq;
     private javax.swing.JMenuBar menuBarCliente;
     // End of variables declaration//GEN-END:variables
+
+    private boolean soNumericos(String validacao)
+    {
+        for (int i = 0; i < validacao.length(); i++)
+        {
+            if(validacao.charAt(i) <= 48 || validacao.charAt(i) >= 57)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
