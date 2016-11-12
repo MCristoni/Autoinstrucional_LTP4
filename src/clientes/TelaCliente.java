@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Telas;
+package clientes;
 
 //import Utilitarios.HintTextFieldUI;
-import banco.Banco;
+import banco.BancoConexoes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -64,9 +64,9 @@ public class TelaCliente extends javax.swing.JFrame
         btnIncluirCliente.setActionCommand("Incluir");
         btnIncluirCliente.setLabel("  Incluir");
         btnIncluirCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
-        btnIncluirCliente.setMaximumSize(new java.awt.Dimension(84, 35));
-        btnIncluirCliente.setMinimumSize(new java.awt.Dimension(84, 35));
-        btnIncluirCliente.setPreferredSize(new java.awt.Dimension(84, 35));
+        btnIncluirCliente.setMaximumSize(new java.awt.Dimension(90, 35));
+        btnIncluirCliente.setMinimumSize(new java.awt.Dimension(90, 35));
+        btnIncluirCliente.setPreferredSize(new java.awt.Dimension(90, 35));
         btnIncluirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIncluirClienteActionPerformed(evt);
@@ -77,9 +77,9 @@ public class TelaCliente extends javax.swing.JFrame
         btnExcluirCliente.setText("  Excluir");
         btnExcluirCliente.setActionCommand("Excluir");
         btnExcluirCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
-        btnExcluirCliente.setMaximumSize(new java.awt.Dimension(84, 35));
-        btnExcluirCliente.setMinimumSize(new java.awt.Dimension(84, 35));
-        btnExcluirCliente.setPreferredSize(new java.awt.Dimension(84, 35));
+        btnExcluirCliente.setMaximumSize(new java.awt.Dimension(90, 35));
+        btnExcluirCliente.setMinimumSize(new java.awt.Dimension(90, 35));
+        btnExcluirCliente.setPreferredSize(new java.awt.Dimension(90, 35));
         btnExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirClienteActionPerformed(evt);
@@ -91,9 +91,9 @@ public class TelaCliente extends javax.swing.JFrame
         btnAlterarCliente.setToolTipText("");
         btnAlterarCliente.setActionCommand("Alterar");
         btnAlterarCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
-        btnAlterarCliente.setMaximumSize(new java.awt.Dimension(84, 35));
-        btnAlterarCliente.setMinimumSize(new java.awt.Dimension(84, 35));
-        btnAlterarCliente.setPreferredSize(new java.awt.Dimension(84, 35));
+        btnAlterarCliente.setMaximumSize(new java.awt.Dimension(90, 35));
+        btnAlterarCliente.setMinimumSize(new java.awt.Dimension(90, 35));
+        btnAlterarCliente.setPreferredSize(new java.awt.Dimension(90, 35));
         btnAlterarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarClienteActionPerformed(evt);
@@ -102,7 +102,6 @@ public class TelaCliente extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu Clientes");
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -154,11 +153,14 @@ public class TelaCliente extends javax.swing.JFrame
                 return canEdit [columnIndex];
             }
         });
+        jTablePesq.setGridColor(new java.awt.Color(0, 0, 0));
         jTablePesq.setRowHeight(20);
+        jTablePesq.setShowGrid(true);
         jScrollPane2.setViewportView(jTablePesq);
         if (jTablePesq.getColumnModel().getColumnCount() > 0) {
             jTablePesq.getColumnModel().getColumn(0).setResizable(false);
-            jTablePesq.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTablePesq.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTablePesq.getColumnModel().getColumn(5).setResizable(false);
             jTablePesq.getColumnModel().getColumn(5).setPreferredWidth(30);
         }
 
@@ -331,10 +333,10 @@ public class TelaCliente extends javax.swing.JFrame
         {
             try
             {
-                Banco.abrirConexao();
-                ResultSet resp = Banco.buscarClientesPorNome("");
+                BancoConexoes.abrirConexao();
+                ResultSet resp = BancoCliente.buscarClientesPorNome("");
                 LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
-                Banco.fecharConexao();
+                BancoConexoes.fecharConexao();
             } 
             catch (SQLException | LtpUtilException e)
             {
@@ -345,10 +347,10 @@ public class TelaCliente extends javax.swing.JFrame
         {
             try
             {
-                Banco.abrirConexao();
-                ResultSet resp = Banco.buscarClientesPorCod(Integer.parseInt(campoPesquisaCliente.getText()));
+                BancoConexoes.abrirConexao();
+                ResultSet resp = BancoCliente.buscarClientesPorCod(Integer.parseInt(campoPesquisaCliente.getText()));
                 LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
-                Banco.fecharConexao();
+                BancoConexoes.fecharConexao();
             }
             catch (SQLException | LtpUtilException e)
             {
@@ -359,10 +361,10 @@ public class TelaCliente extends javax.swing.JFrame
         {
             try
             {
-                Banco.abrirConexao();
-                ResultSet resp = Banco.buscarClientesPorNome(campoPesquisaCliente.getText());
+                BancoConexoes.abrirConexao();
+                ResultSet resp = BancoCliente.buscarClientesPorNome(campoPesquisaCliente.getText());
                 LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
-                Banco.fecharConexao();
+                BancoConexoes.fecharConexao();
             } 
             catch (SQLException | LtpUtilException e)
             {

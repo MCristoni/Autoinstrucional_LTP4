@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Telas;
+package clientes;
 
-import banco.Banco;
+import banco.BancoConexoes;
 import dados.Cliente;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -252,10 +252,10 @@ public class TelaClienteIncluir extends javax.swing.JFrame
                 
                 try
                 {
-                    Banco.abrirConexao();
-                    Banco.adicionarCliente(cliente);
-                    JOptionPane.showMessageDialog(this, "Cliente '" + cliente.getNome() + "' cadastrado!\nSeu código será: " + Banco.pesqCodUltimoCliente(), "Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    Banco.fecharConexao();
+                    BancoConexoes.abrirConexao();
+                    BancoCliente.adicionarCliente(cliente);
+                    JOptionPane.showMessageDialog(this, "Cliente '" + cliente.getNome() + "' cadastrado!\nSeu código será: " + BancoCliente.pesqCodUltimoCliente(), "Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    BancoConexoes.fecharConexao();
                     dispose();
                     
                 } 
@@ -348,8 +348,8 @@ public class TelaClienteIncluir extends javax.swing.JFrame
 //        int cod = 0;
 //        try 
 //        {
-//            Banco.abrirConexao();
-//            cod = Banco.pesqCodUltimoCliente() + 1;
+//            BancoConexoes.abrirConexao();
+//            cod = BancoConexoes.pesqCodUltimoCliente() + 1;
 //            
 //        } 
 //        catch (SQLException e) 

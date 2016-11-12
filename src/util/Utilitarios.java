@@ -5,7 +5,8 @@
  */
 package util;
 
-import banco.Banco;
+import banco.BancoConexoes;
+import clientes.BancoCliente;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -110,9 +111,9 @@ public class Utilitarios
         
         try 
         {
-            Banco.abrirConexao();
-            uf = Banco.recuperarEstados();
-            Banco.fecharConexao();
+            BancoConexoes.abrirConexao();
+            uf = BancoCliente.recuperarEstados();
+            BancoConexoes.fecharConexao();
         } 
         catch (SQLException e) 
         {

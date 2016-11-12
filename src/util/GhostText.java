@@ -1,7 +1,7 @@
 package util;
 
-import Telas.TelaCliente;
-import Telas.TelaClienteIncluir;
+import clientes.TelaCliente;
+import clientes.TelaClienteIncluir;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
