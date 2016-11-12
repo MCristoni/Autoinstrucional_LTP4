@@ -7,18 +7,12 @@ package Telas;
 
 import banco.Banco;
 import dados.Cliente;
-import java.sql.Date;
-import java.util.Calendar;
-import utilitarios.LtpUtil;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import util.GhostText;
+import util.Utilitarios;
+import utilitarios.LtpUtil;
 
 /**
  *
@@ -27,22 +21,11 @@ import util.GhostText;
 public class TelaClienteExcluir extends javax.swing.JFrame 
 {
 
-    /**
-     * Creates new form TelaClienteIncluir
-     */
-    public TelaClienteExcluir() throws ParseException 
+    public TelaClienteExcluir() throws ParseException
     {
         initComponents();
         jPanel1.requestFocus();
-        //int cod = pesqUltimoCodCliente();
-        //if (cod != 0)
-        //{
-          //  campoCodIC.setText(cod + "");
-        //}
-        ArrayList<String> uf = inicializarComboBox();
-        campoUfIC.setModel(new DefaultComboBoxModel(new Vector(uf)));
-        campoDataIC.setText(descobrirDataString());
-        setarMascaras();
+        new GhostText(campoCodEC, "Entre com o código do cliente que deseja excluir e aperte enter");
     }
 
     /**
@@ -63,20 +46,22 @@ public class TelaClienteExcluir extends javax.swing.JFrame
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        campoDataIC = new javax.swing.JTextField();
-        campoEmailIC = new javax.swing.JTextField();
-        campoCidadeIC = new javax.swing.JTextField();
-        campoBairroIC = new javax.swing.JTextField();
-        campoEnderecoIC = new javax.swing.JTextField();
-        campoNomeIC = new javax.swing.JTextField();
-        btnCadastrarCliente = new javax.swing.JButton();
-        campoUfIC = new javax.swing.JComboBox<>();
+        campoDataEC = new javax.swing.JTextField();
+        campoEmailEC = new javax.swing.JTextField();
+        campoCidadeEC = new javax.swing.JTextField();
+        campoBairroEC = new javax.swing.JTextField();
+        campoEnderecoEC = new javax.swing.JTextField();
+        campoNomeEC = new javax.swing.JTextField();
+        btnExcluirCliente = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        campoCepIC = new javax.swing.JFormattedTextField();
-        campoTelefoneIC = new javax.swing.JFormattedTextField();
+        campoTelefoneIEC = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        campoCodEC = new javax.swing.JTextField();
+        campoUfEC = new javax.swing.JTextField();
+        campoCepEC = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Incluir Cliente");
+        setTitle("Excluir Cliente");
         setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(576, 426));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -103,20 +88,37 @@ public class TelaClienteExcluir extends javax.swing.JFrame
 
         jLabel10.setText("Data inclusão:");
 
-        campoDataIC.setForeground(new java.awt.Color(51, 51, 51));
-        campoDataIC.setFocusable(false);
-        campoDataIC.setRequestFocusEnabled(false);
+        campoDataEC.setForeground(new java.awt.Color(51, 51, 51));
+        campoDataEC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoDataEC.setEnabled(false);
+        campoDataEC.setFocusable(false);
+        campoDataEC.setRequestFocusEnabled(false);
 
-        campoEnderecoIC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoEnderecoICActionPerformed(evt);
-            }
-        });
+        campoEmailEC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoEmailEC.setEnabled(false);
+        campoEmailEC.setFocusable(false);
 
-        btnCadastrarCliente.setText("Incluir");
-        btnCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
+        campoCidadeEC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoCidadeEC.setEnabled(false);
+        campoCidadeEC.setFocusable(false);
+
+        campoBairroEC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoBairroEC.setEnabled(false);
+        campoBairroEC.setFocusable(false);
+
+        campoEnderecoEC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoEnderecoEC.setEnabled(false);
+        campoEnderecoEC.setFocusable(false);
+
+        campoNomeEC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoNomeEC.setEnabled(false);
+        campoNomeEC.setFocusable(false);
+
+        btnExcluirCliente.setText("Excluir");
+        btnExcluirCliente.setEnabled(false);
+        btnExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarClienteActionPerformed(evt);
+                btnExcluirClienteActionPerformed(evt);
             }
         });
 
@@ -131,16 +133,25 @@ public class TelaClienteExcluir extends javax.swing.JFrame
             .addGap(0, 5, Short.MAX_VALUE)
         );
 
-        try {
-            campoCepIC.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        campoCepIC.addActionListener(new java.awt.event.ActionListener() {
+        campoTelefoneIEC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoTelefoneIEC.setEnabled(false);
+        campoTelefoneIEC.setFocusable(false);
+
+        jLabel1.setText("Código:");
+
+        campoCodEC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoCepICActionPerformed(evt);
+                campoCodECActionPerformed(evt);
             }
         });
+
+        campoUfEC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoUfEC.setEnabled(false);
+        campoUfEC.setFocusable(false);
+
+        campoCepEC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoCepEC.setEnabled(false);
+        campoCepEC.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,93 +160,102 @@ public class TelaClienteExcluir extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnExcluirCliente))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campoCidadeIC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                                .addComponent(campoCidadeEC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campoTelefoneIC))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campoNomeIC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                                .addComponent(campoTelefoneIEC))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campoEnderecoIC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                                .addComponent(campoEnderecoEC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campoBairroIC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                                .addComponent(campoBairroEC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campoCepIC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                                .addComponent(campoCepEC)
+                                .addGap(6, 6, 6))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campoUfIC, 0, 454, Short.MAX_VALUE))
+                                .addComponent(campoUfEC))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoDataIC)
-                                    .addComponent(campoEmailIC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnCadastrarCliente)))
+                                    .addComponent(campoDataEC)
+                                    .addComponent(campoEmailEC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(campoNomeEC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                                    .addComponent(campoCodEC, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))))))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(campoCodEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(campoNomeIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNomeEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(campoEnderecoIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoEnderecoEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(campoBairroIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoBairroEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(campoCidadeIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoCidadeEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(campoUfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoUfEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(campoCepIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoCepEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoTelefoneIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoTelefoneIEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(campoEmailIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoEmailEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(campoDataIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoDataEC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadastrarCliente))
+                    .addComponent(btnExcluirCliente))
                 .addContainerGap())
         );
 
@@ -244,92 +264,88 @@ public class TelaClienteExcluir extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        //Quando a tela de inclusão de clientes for fechada, mudar a flag que evita a abertura de várias para falso.
-        TelaCliente.mostrandoTelaIncluirCliente = false;
+        //Quando a tela de exclusão de clientes for fechada, mudar a flag que evita a abertura de várias para falso.
+        TelaCliente.mostrandoTelaExcluirCliente = false;
     }//GEN-LAST:event_formWindowClosed
 
-    private void campoEnderecoICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEnderecoICActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoEnderecoICActionPerformed
-
-    private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
+    private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
         
-        String camposInvalidos = validarEntradas();
-        if(camposInvalidos.equals(""))
+        int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir esse cliente?", "Confirmar exclusão", JOptionPane.INFORMATION_MESSAGE);
+
+        if (opcao == JOptionPane.YES_OPTION)
         {
-            int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente cadastrar esse cliente?", "Confirmar cadastro", JOptionPane.INFORMATION_MESSAGE);
-            
-            if (opcao == JOptionPane.YES_OPTION)
+            try
             {
-                String telefone;
-                if (campoTelefoneIC.getText().equalsIgnoreCase("Apenas números (DDD + 8 dígitos) - Opcional"))
+                Banco.abrirConexao();
+                String retorno = Banco.excluirCliente(Integer.parseInt(campoCodEC.getText()));
+                if (retorno.equals("")) 
                 {
-                    telefone = "";
+                    JOptionPane.showMessageDialog(this, "Cliente '" + campoNomeEC.getText() + "' excluído!", "Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {
-                    telefone = campoTelefoneIC.getText();
-                    telefone = telefone.replace("(", "");
-                    telefone = telefone.replace(")", "");
-                    telefone = telefone.replace("-", "");
-                    telefone = telefone.replace(" ", "");
-                }
-                
-                String email = "";
-                if (!campoEmailIC.getText().equalsIgnoreCase("Opcional"))
-                {
-                    email = campoEmailIC.getText().toUpperCase();
+                    JOptionPane.showMessageDialog(this, "Algo deu errado!\n" + retorno, "Operação falhou", JOptionPane.INFORMATION_MESSAGE);
+                }                
+                Banco.fecharConexao();
+                dispose();
+            } 
+            catch (SQLException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        } 
+    }//GEN-LAST:event_btnExcluirClienteActionPerformed
+
+    private void campoCodECActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCodECActionPerformed
+        
+        if (!campoCodEC.getText().equalsIgnoreCase("Entre com o código do cliente que deseja excluir e aperte enter") && Utilitarios.soNumericos(campoCodEC.getText()))
+        {
+            try
+            {
+               Banco.abrirConexao();
+               Cliente cliente = Banco.buscarClientesCod(Integer.parseInt(campoCodEC.getText()));
+               Banco.fecharConexao();
+               
+                if (cliente != null) 
+                {                    
+                    campoNomeEC.setText(cliente.getNome());
+                    campoEnderecoEC.setText(cliente.getEndereco());
+                    campoBairroEC.setText(cliente.getBairro());
+                    campoCidadeEC.setText(cliente.getCidade());
+                    campoUfEC.setText(cliente.getUf());
+                    campoCepEC.setText(Utilitarios.formatarCEP(cliente.getCep()));
+                    campoTelefoneIEC.setText(Utilitarios.formatarTelefone(cliente.getTelefone()));
+                    campoEmailEC.setText(cliente.getEmail());
+                    campoDataEC.setText(LtpUtil.formatarData(cliente.getData(), "dd/MM/yyyy") );
+                    btnExcluirCliente.setEnabled(true);
                 }
                 else
                 {
-                    email = "";
+                    campoNomeEC.setText("");
+                    campoEnderecoEC.setText("");
+                    campoBairroEC.setText("");
+                    campoCidadeEC.setText("");
+                    campoUfEC.setText("");
+                    campoCepEC.setText("");
+                    campoTelefoneIEC.setText("");
+                    campoEmailEC.setText("");
+                    campoDataEC.setText("");
+                    btnExcluirCliente.setEnabled(false);
+                    JOptionPane.showMessageDialog(this, "Cliente não encontrado!\nVerifique o código digitado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
                 }
-                
-                String cep;
-                cep = campoCepIC.getText();
-                cep = cep.replace(".", "");
-                cep = cep.replace("-", "");
-                
-                System.err.println(telefone);
-                System.err.println(campoCepIC.getText());
-                
-                Cliente cliente = new Cliente(
-                        campoNomeIC.getText().toUpperCase(),
-                        campoEnderecoIC.getText().toUpperCase(),
-                        campoBairroIC.getText().toUpperCase(), 
-                        campoCidadeIC.getText().toUpperCase(), 
-                        campoUfIC.getSelectedItem().toString().toUpperCase(),
-                        cep, 
-                        telefone, 
-                        email, 
-                        descobrirDataDate());
-                
-                try
-                {
-                    Banco.abrirConexao();
-                    Banco.adicionarCliente(cliente);
-                    JOptionPane.showMessageDialog(this, "Cliente '" + cliente.getNome() + "' cadastrado!\nSeu código será: " + Banco.pesqCodUltimoCliente(), "Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    Banco.fecharConexao();
-                    dispose();
-                    
-                } 
-                catch (SQLException ex)
-                {
-                    Logger.getLogger(TelaClienteExcluir.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            } 
+            catch (NumberFormatException | SQLException e) 
+            {
+                JOptionPane.showMessageDialog(this, e, "Erro", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         else
         {
-            JOptionPane.showMessageDialog(this, "Verifique o(s) campo(s):\n" + camposInvalidos, "Entrada(s) inválida(s)!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Código inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
         }
-        
-        
-    }//GEN-LAST:event_btnCadastrarClienteActionPerformed
 
-    private void campoCepICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCepICActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoCepICActionPerformed
+        
+    }//GEN-LAST:event_campoCodECActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,29 +381,24 @@ public class TelaClienteExcluir extends javax.swing.JFrame
         {
             public void run() 
             {
-                try 
-                {
-                    new TelaClienteExcluir().setVisible(true);
-                } 
-                catch (ParseException ex) 
-                {
-                    Logger.getLogger(TelaClienteExcluir.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrarCliente;
-    private javax.swing.JTextField campoBairroIC;
-    public static javax.swing.JFormattedTextField campoCepIC;
-    private javax.swing.JTextField campoCidadeIC;
-    private javax.swing.JTextField campoDataIC;
-    private javax.swing.JTextField campoEmailIC;
-    private javax.swing.JTextField campoEnderecoIC;
-    private javax.swing.JTextField campoNomeIC;
-    public static javax.swing.JFormattedTextField campoTelefoneIC;
-    private javax.swing.JComboBox<String> campoUfIC;
+    private javax.swing.JButton btnExcluirCliente;
+    private javax.swing.JTextField campoBairroEC;
+    private javax.swing.JTextField campoCepEC;
+    private javax.swing.JTextField campoCidadeEC;
+    private javax.swing.JTextField campoCodEC;
+    private javax.swing.JTextField campoDataEC;
+    private javax.swing.JTextField campoEmailEC;
+    private javax.swing.JTextField campoEnderecoEC;
+    private javax.swing.JTextField campoNomeEC;
+    public static javax.swing.JFormattedTextField campoTelefoneIEC;
+    private javax.swing.JTextField campoUfEC;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -400,163 +411,4 @@ public class TelaClienteExcluir extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    private Date descobrirDataDate()
-    {
-        return (new Date(Calendar.getInstance().getTimeInMillis()));
-    }
-    
-    private String descobrirDataString() 
-    {
-        Date data = descobrirDataDate();
-        return LtpUtil.formatarData(data, "dd/MM/yyyy");
-    }
-
-//    private int pesqUltimoCodCliente() 
-//    {
-//        int cod = 0;
-//        try 
-//        {
-//            Banco.abrirConexao();
-//            cod = Banco.pesqCodUltimoCliente() + 1;
-//            
-//        } 
-//        catch (SQLException e) 
-//        {
-//            System.out.println(e.getMessage());
-//        }
-//        return cod;
-//    }
-
-    private ArrayList<String> inicializarComboBox() 
-    {
-        ArrayList<String> uf = new ArrayList<>();
-        
-        try 
-        {
-            Banco.abrirConexao();
-            uf = Banco.recuperarEstados();
-            Banco.fecharConexao();
-        } 
-        catch (SQLException e) 
-        {
-            System.out.println(e.getMessage());
-        }
-        return uf;
-    }
-
-    private String validarEntradas()
-    {
-        String resp = "";
-        
-        new GhostText(campoEnderecoIC, "Campo obrigatório");
-        new GhostText(campoBairroIC, "Campo obrigatório");
-        new GhostText(campoEmailIC, "Opcional");
-        new GhostText(campoTelefoneIC, "Apenas números (DDD + 8 dígitos) - Opcional");
-        new GhostText(campoCepIC, "Apenas números");
-        new GhostText(campoCidadeIC, "Campo obrigatório");
-        //Valida Nome
-        if(campoNomeIC.getText().equals("Mínimo de 2 nomes"))
-        {            
-            resp += "Nome\n";
-        }
-        else if (campoNomeIC.getText().trim().equals(""))
-        {
-            resp += "Nome\n";
-        }
-        
-        //Valida endereço
-        if (campoEnderecoIC.getText().equalsIgnoreCase("Campo obrigatório"))
-        {
-            resp += "Endereço\n";
-        }
-        else if (campoEnderecoIC.getText().trim().equals(""))
-        {
-            resp += "Endereço\n";
-        }
-        
-        //Valida bairro
-        if (campoBairroIC.getText().equalsIgnoreCase("Campo obrigatório"))
-        {
-            resp += "Bairro\n";
-        }
-        else if (campoBairroIC.getText().trim().equals(""))
-        {
-            resp += "Bairro\n";
-        }
-        
-        //Valida cidade
-        if (campoCidadeIC.getText().equalsIgnoreCase("Campo obrigatório"))
-        {
-            resp += "Cidade\n";
-        }
-        else if (campoCidadeIC.getText().trim().equals(""))
-        {
-            resp += "Cidade\n";
-        }
-        
-        //Valida UF
-        if(campoUfIC.getSelectedItem().equals("Selecione"))
-        {
-            resp += "UF\n";
-        }
-        
-        
-        //Valida CEP
-        if (!campoCepIC.getText().equalsIgnoreCase("Apenas números")) 
-        {
-            if (!campoCepIC.getText().trim().matches("[0-9]{2}[.][0-9]{3}[-][0-9]{3}")) 
-            {
-                resp += "CEP\n";
-            }
-        }
-        else
-        {
-            resp += "CEP\n";
-        }
-        
-        //Valida telefone
-        if (!campoTelefoneIC.getText().equalsIgnoreCase("Apenas números (DDD + 8 dígitos) - Opcional"))
-        {
-            if (campoTelefoneIC.getText().length() != 14) 
-            {
-                resp += "Telefone\n";
-            }
-            else
-            {
-                for (int i = 0; i < campoTelefoneIC.getText().length(); i++)
-                {
-                    if ((campoTelefoneIC.getText().charAt(i) < 48 || campoTelefoneIC.getText().charAt(i) > 57) &&
-                       campoTelefoneIC.getText().charAt(i) != '(' && campoTelefoneIC.getText().charAt(i) != ')' && 
-                       campoTelefoneIC.getText().charAt(i) != ' ' && campoTelefoneIC.getText().charAt(i) != '-')
-                    {
-                        
-                        System.err.println(campoTelefoneIC.getText().charAt(i));
-                        resp += "Telefone\n";
-                        break;
-                    }
-                }
-            }
-        }
-        
-        //Validar email
-        if (!campoEmailIC.getText().equalsIgnoreCase("Opcional")) 
-        {
-            if (!LtpUtil.validarEmail(campoEmailIC.getText().trim())) 
-            {
-                resp += "E-mail";
-            }
-        }
-        return resp;
-    }
-
-    private void setarMascaras() 
-    {
-        GhostText ghostText = new GhostText(campoNomeIC, "Campo obrigatório");
-        GhostText ghostText1 = new GhostText(campoEnderecoIC, "Campo obrigatório");
-        GhostText ghostText2 = new GhostText(campoBairroIC, "Campo obrigatório");
-        GhostText ghostText6 = new GhostText(campoEmailIC, "Opcional");
-        GhostText ghostText3 = new GhostText(campoTelefoneIC, "Apenas números (DDD + 8 dígitos) - Opcional");
-        GhostText ghostText4 = new GhostText(campoCepIC, "Apenas números");
-        GhostText ghostText5 = new GhostText(campoCidadeIC, "Campo obrigatório");
-    }
 }

@@ -7,9 +7,6 @@ package Telas;
 
 import banco.Banco;
 import dados.Cliente;
-import java.sql.Date;
-import java.util.Calendar;
-import utilitarios.LtpUtil;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -19,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import util.GhostText;
+import util.Utilitarios;
 
 /**
  *
@@ -34,14 +32,9 @@ public class TelaClienteIncluir extends javax.swing.JFrame
     {
         initComponents();
         jPanel1.requestFocus();
-        //int cod = pesqUltimoCodCliente();
-        //if (cod != 0)
-        //{
-          //  campoCodIC.setText(cod + "");
-        //}
-        ArrayList<String> uf = inicializarComboBox();
+        ArrayList<String> uf = Utilitarios.inicializarComboBox();
         campoUfIC.setModel(new DefaultComboBoxModel(new Vector(uf)));
-        campoDataIC.setText(descobrirDataString());
+        campoDataIC.setText(Utilitarios.descobrirDataString());
         setarMascaras();
     }
 
@@ -78,7 +71,6 @@ public class TelaClienteIncluir extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Incluir Cliente");
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(576, 430));
         setMinimumSize(new java.awt.Dimension(576, 426));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -108,12 +100,6 @@ public class TelaClienteIncluir extends javax.swing.JFrame
         campoDataIC.setFocusable(false);
         campoDataIC.setRequestFocusEnabled(false);
 
-        campoEnderecoIC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoEnderecoICActionPerformed(evt);
-            }
-        });
-
         btnCadastrarCliente.setText("Incluir");
         btnCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,11 +123,6 @@ public class TelaClienteIncluir extends javax.swing.JFrame
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        campoCepIC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoCepICActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,39 +181,39 @@ public class TelaClienteIncluir extends javax.swing.JFrame
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(campoNomeIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNomeIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(campoEnderecoIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoEnderecoIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(campoBairroIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoBairroIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(campoCidadeIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoCidadeIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(campoUfIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoUfIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(campoCepIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoCepIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoTelefoneIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoTelefoneIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(campoEmailIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoEmailIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(campoDataIC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoDataIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,10 +230,6 @@ public class TelaClienteIncluir extends javax.swing.JFrame
         TelaCliente.mostrandoTelaIncluirCliente = false;
     }//GEN-LAST:event_formWindowClosed
 
-    private void campoEnderecoICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEnderecoICActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoEnderecoICActionPerformed
-
     private void btnCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarClienteActionPerformed
         
         String camposInvalidos = validarEntradas();
@@ -262,48 +239,16 @@ public class TelaClienteIncluir extends javax.swing.JFrame
             
             if (opcao == JOptionPane.YES_OPTION)
             {
-                String telefone;
-                if (campoTelefoneIC.getText().equalsIgnoreCase("Apenas números (DDD + 8 dígitos) - Opcional"))
-                {
-                    telefone = "";
-                }
-                else
-                {
-                    telefone = campoTelefoneIC.getText();
-                    telefone = telefone.replace("(", "");
-                    telefone = telefone.replace(")", "");
-                    telefone = telefone.replace("-", "");
-                    telefone = telefone.replace(" ", "");
-                }
-                
-                String email = "";
-                if (!campoEmailIC.getText().equalsIgnoreCase("Opcional"))
-                {
-                    email = campoEmailIC.getText().toUpperCase();
-                }
-                else
-                {
-                    email = "";
-                }
-                
-                String cep;
-                cep = campoCepIC.getText();
-                cep = cep.replace(".", "");
-                cep = cep.replace("-", "");
-                
-                System.err.println(telefone);
-                System.err.println(campoCepIC.getText());
-                
                 Cliente cliente = new Cliente(
                         campoNomeIC.getText().toUpperCase(),
                         campoEnderecoIC.getText().toUpperCase(),
                         campoBairroIC.getText().toUpperCase(), 
                         campoCidadeIC.getText().toUpperCase(), 
                         campoUfIC.getSelectedItem().toString().toUpperCase(),
-                        cep, 
-                        telefone, 
-                        email, 
-                        descobrirDataDate());
+                        Utilitarios.tirarFormatacaoCep(campoCepIC), 
+                        Utilitarios.tirarFormatacaoTelefone(campoTelefoneIC), 
+                        Utilitarios.tirarFormatacaoEmail(campoEmailIC), 
+                        Utilitarios.descobrirDataDate());
                 
                 try
                 {
@@ -327,10 +272,6 @@ public class TelaClienteIncluir extends javax.swing.JFrame
         
         
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
-
-    private void campoCepICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCepICActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoCepICActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,14 +306,14 @@ public class TelaClienteIncluir extends javax.swing.JFrame
         {
             public void run() 
             {
-                try 
-                {
-                    new TelaClienteIncluir().setVisible(true);
-                } 
-                catch (ParseException ex) 
-                {
-                    Logger.getLogger(TelaClienteIncluir.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try 
+//                {
+//                    new TelaClienteIncluir().setVisible(true);
+//                } 
+//                catch (ParseException ex) 
+//                {
+//                    Logger.getLogger(TelaClienteIncluir.class.getName()).log(Level.SEVERE, null, ex);
+//                }
             }
         });
     }
@@ -400,16 +341,7 @@ public class TelaClienteIncluir extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    private Date descobrirDataDate()
-    {
-        return (new Date(Calendar.getInstance().getTimeInMillis()));
-    }
     
-    private String descobrirDataString() 
-    {
-        Date data = descobrirDataDate();
-        return LtpUtil.formatarData(data, "dd/MM/yyyy");
-    }
 
 //    private int pesqUltimoCodCliente() 
 //    {
@@ -426,127 +358,9 @@ public class TelaClienteIncluir extends javax.swing.JFrame
 //        }
 //        return cod;
 //    }
-
-    private ArrayList<String> inicializarComboBox() 
-    {
-        ArrayList<String> uf = new ArrayList<>();
-        
-        try 
-        {
-            Banco.abrirConexao();
-            uf = Banco.recuperarEstados();
-            Banco.fecharConexao();
-        } 
-        catch (SQLException e) 
-        {
-            System.out.println(e.getMessage());
-        }
-        return uf;
-    }
-
     private String validarEntradas()
-    {
-        String resp = "";
-        
-        new GhostText(campoEnderecoIC, "Campo obrigatório");
-        new GhostText(campoBairroIC, "Campo obrigatório");
-        new GhostText(campoEmailIC, "Opcional");
-        new GhostText(campoTelefoneIC, "Apenas números (DDD + 8 dígitos) - Opcional");
-        new GhostText(campoCepIC, "Apenas números");
-        new GhostText(campoCidadeIC, "Campo obrigatório");
-        //Valida Nome
-        if(campoNomeIC.getText().equals("Mínimo de 2 nomes"))
-        {            
-            resp += "Nome\n";
-        }
-        else if (campoNomeIC.getText().trim().equals(""))
-        {
-            resp += "Nome\n";
-        }
-        
-        //Valida endereço
-        if (campoEnderecoIC.getText().equalsIgnoreCase("Campo obrigatório"))
-        {
-            resp += "Endereço\n";
-        }
-        else if (campoEnderecoIC.getText().trim().equals(""))
-        {
-            resp += "Endereço\n";
-        }
-        
-        //Valida bairro
-        if (campoBairroIC.getText().equalsIgnoreCase("Campo obrigatório"))
-        {
-            resp += "Bairro\n";
-        }
-        else if (campoBairroIC.getText().trim().equals(""))
-        {
-            resp += "Bairro\n";
-        }
-        
-        //Valida cidade
-        if (campoCidadeIC.getText().equalsIgnoreCase("Campo obrigatório"))
-        {
-            resp += "Cidade\n";
-        }
-        else if (campoCidadeIC.getText().trim().equals(""))
-        {
-            resp += "Cidade\n";
-        }
-        
-        //Valida UF
-        if(campoUfIC.getSelectedItem().equals("Selecione"))
-        {
-            resp += "UF\n";
-        }
-        
-        
-        //Valida CEP
-        if (!campoCepIC.getText().equalsIgnoreCase("Apenas números")) 
-        {
-            if (!campoCepIC.getText().trim().matches("[0-9]{2}[.][0-9]{3}[-][0-9]{3}")) 
-            {
-                resp += "CEP\n";
-            }
-        }
-        else
-        {
-            resp += "CEP\n";
-        }
-        
-        //Valida telefone
-        if (!campoTelefoneIC.getText().equalsIgnoreCase("Apenas números (DDD + 8 dígitos) - Opcional"))
-        {
-            if (campoTelefoneIC.getText().length() != 14) 
-            {
-                resp += "Telefone\n";
-            }
-            else
-            {
-                for (int i = 0; i < campoTelefoneIC.getText().length(); i++)
-                {
-                    if ((campoTelefoneIC.getText().charAt(i) < 48 || campoTelefoneIC.getText().charAt(i) > 57) &&
-                       campoTelefoneIC.getText().charAt(i) != '(' && campoTelefoneIC.getText().charAt(i) != ')' && 
-                       campoTelefoneIC.getText().charAt(i) != ' ' && campoTelefoneIC.getText().charAt(i) != '-')
-                    {
-                        
-                        System.err.println(campoTelefoneIC.getText().charAt(i));
-                        resp += "Telefone\n";
-                        break;
-                    }
-                }
-            }
-        }
-        
-        //Validar email
-        if (!campoEmailIC.getText().equalsIgnoreCase("Opcional")) 
-        {
-            if (!LtpUtil.validarEmail(campoEmailIC.getText().trim())) 
-            {
-                resp += "E-mail";
-            }
-        }
-        return resp;
+    {        
+        return Utilitarios.validarEntradas(campoNomeIC, campoEnderecoIC, campoBairroIC, campoCidadeIC, campoUfIC, campoCepIC, campoTelefoneIC, campoEmailIC);
     }
 
     private void setarMascaras() 

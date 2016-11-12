@@ -5,6 +5,8 @@
  */
 package Telas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author usuario
@@ -124,12 +126,16 @@ public class TelaPrincipal extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClientesActionPerformed
-        // TODO add your handling code here:
         if (!mostrandoTelaClientes && !mostrandoTelaProdutos && !mostrandoTelaVendas && !mostrandoTelaVendedores) 
         {
-            new TelaCliente().setVisible(true); 
+            new TelaCliente().setVisible(true);
             mostrandoTelaClientes = true;
         }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Uma tela do menu principal já está aberta. \nFeche-a para abrir outra!");
+        }
+        
         
     }//GEN-LAST:event_BtnClientesActionPerformed
 

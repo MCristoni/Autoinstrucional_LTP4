@@ -7,18 +7,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.firebirdsql.jdbc.FBDriver;
 
 
 public class Banco 
 {
     public static Connection con;
-
     public static void abrirConexao() throws SQLException
     {
+        String mac = "jdbc:firebirdsql:Matheus:/Users/usuario/Desktop/Auto Instrucional TLP4/Banco/Mac/BDVENDAS.GDB";
+        String pc = "jdbc:firebirdsql:DesktopMatheus:E:\\Auto Instrucional TLP4\\banco\\Win\\BDVendas2.GDB";
             DriverManager.registerDriver(new FBDriver());
-            con = DriverManager.getConnection("jdbc:firebirdsql:Matheus:/Users/usuario/Desktop/Auto Instrucional TLP4/Banco/Mac/BDVENDAS.GDB",
-                            "SYSDBA", "masterkey");
+            con = DriverManager.getConnection(pc, "SYSDBA", "masterkey");
             System.err.println("Conexao aberta");
     }
 
@@ -87,5 +89,58 @@ public class Banco
         PreparedStatement pstm = con.prepareStatement("Select * from CLIENTES where CODCLIENTE like ?");
         pstm.setInt(1, cod);
         return pstm.executeQuery();
+    }
+    
+    public static Cliente buscarClientesCod (int cod) throws SQLException
+    {
+        PreparedStatement sql = con.prepareStatement("Select * from CLIENTES where CODCLIENTE like ?");
+        sql.setInt(1, cod);
+        ResultSet resp = sql.executeQuery();
+        if (resp.next()) 
+        {
+            Cliente retorno;
+            return  retorno = (new Cliente(
+                    resp.getInt("CODCLIENTE"), resp.getString("NOME"), resp.getString("ENDERECO"), resp.getString("BAIRRO"), resp.getString("CIDADE"), 
+                    resp.getString("UF"), resp.getString("CEP"), resp.getString("TELEFONE"), resp.getString("E_MAIL"), resp.getDate("DATA_CAD_CLIENTE")));
+        }
+        return null;
+    }
+    
+    public static String excluirCliente (int cod)
+    {
+        try
+        {
+            PreparedStatement pstm = con.prepareStatement("DELETE from CLIENTES where CODCLIENTE like ?");
+            pstm.setInt(1, cod);
+            pstm.executeUpdate();
+            return "";
+        }
+        catch (SQLException ex)
+        {
+            return ex.getMessage();
+        }
+    }
+
+    public static String alterarCliente(Cliente cliente)
+    {
+        try
+        {
+            PreparedStatement pstm = con.prepareStatement("UPDATE CLIENTES SET NOME = ?, ENDERECO = ?, BAIRRO = ?, CIDADE = ?, UF = ?, CEP = ?, TELEFONE = ?, E_MAIL = ? WHERE CODCLIENTE = ?");
+            pstm.setString(1, cliente.getNome());
+            pstm.setString(2, cliente.getEndereco());
+            pstm.setString(3, cliente.getBairro());
+            pstm.setString(4, cliente.getCidade());
+            pstm.setString(5, cliente.getUf());
+            pstm.setString(6, cliente.getCep());
+            pstm.setString(7, cliente.getTelefone());
+            pstm.setString(8, cliente.getEmail());
+            pstm.setInt(9, cliente.getCod());
+            pstm.executeUpdate();
+            return "";
+        }
+        catch (SQLException ex)
+        {
+            return ex.getMessage();
+        }
     }
 }

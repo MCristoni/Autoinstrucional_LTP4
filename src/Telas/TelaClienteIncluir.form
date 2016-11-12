@@ -7,9 +7,6 @@
     <Property name="location" type="java.awt.Point" editor="org.netbeans.beaninfo.editors.PointEditor">
       <Point value="[0, 0]"/>
     </Property>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[576, 430]"/>
-    </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[576, 426]"/>
     </Property>
@@ -105,47 +102,47 @@
               <EmptySpace pref="15" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoNomeIC" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="campoNomeIC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoEnderecoIC" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="campoEnderecoIC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoBairroIC" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="campoBairroIC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoCidadeIC" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="campoCidadeIC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoUfIC" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="campoUfIC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoCepIC" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="campoCepIC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel8" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="campoTelefoneIC" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="campoTelefoneIC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoEmailIC" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="campoEmailIC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoDataIC" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="campoDataIC" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -219,9 +216,6 @@
     <Component class="javax.swing.JTextField" name="campoBairroIC">
     </Component>
     <Component class="javax.swing.JTextField" name="campoEnderecoIC">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoEnderecoICActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="campoNomeIC">
     </Component>
@@ -264,9 +258,6 @@
           <Format format="" subtype="-1" type="5"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoCepICActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>

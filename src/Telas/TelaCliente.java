@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.GhostText;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import util.Utilitarios;
 import utilitarios.LtpUtil;
 import utilitarios.LtpUtilException;
 
@@ -38,6 +38,7 @@ public class TelaCliente extends javax.swing.JFrame
         GhostText gt = new GhostText(campoPesquisaCliente, "Código ou nome do cliente");
         menuBarCliente.add(btnIncluirCliente);
         menuBarCliente.add(btnExcluirCliente);
+        menuBarCliente.add(btnAlterarCliente);
     }
 
     /**
@@ -51,6 +52,7 @@ public class TelaCliente extends javax.swing.JFrame
 
         btnIncluirCliente = new javax.swing.JButton();
         btnExcluirCliente = new javax.swing.JButton();
+        btnAlterarCliente = new javax.swing.JButton();
         btnPesquisaCliente = new javax.swing.JButton();
         campoPesquisaCliente = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -84,9 +86,22 @@ public class TelaCliente extends javax.swing.JFrame
             }
         });
 
+        btnAlterarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/userExcluir.png"))); // NOI18N
+        btnAlterarCliente.setText("  Alterar");
+        btnAlterarCliente.setToolTipText("");
+        btnAlterarCliente.setActionCommand("Alterar");
+        btnAlterarCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
+        btnAlterarCliente.setMaximumSize(new java.awt.Dimension(84, 35));
+        btnAlterarCliente.setMinimumSize(new java.awt.Dimension(84, 35));
+        btnAlterarCliente.setPreferredSize(new java.awt.Dimension(84, 35));
+        btnAlterarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarClienteActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu Clientes");
-        setPreferredSize(new java.awt.Dimension(907, 452));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -187,17 +202,17 @@ public class TelaCliente extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
-        
-        //if(campoPesquisaCliente.
+        efetuarPesquisa();
     }//GEN-LAST:event_btnPesquisaClienteActionPerformed
 
     private void btnIncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirClienteActionPerformed
-        if (!mostrandoTelaIncluirCliente) 
+        if (!mostrandoTelaExcluirCliente && !mostrandoTelaAlterarCliente && !mostrandoTelaIncluirCliente) 
         {
             try 
             {
                 new TelaClienteIncluir().setVisible(true);
-            } catch (ParseException ex) 
+            } 
+            catch (ParseException ex) 
             {
                 Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -205,7 +220,7 @@ public class TelaCliente extends javax.swing.JFrame
         }
         else
         {
-            JOptionPane.showMessageDialog(this, "Uma tela de cadastro já está aberta. \nFeche-a para abrir outra!");
+            JOptionPane.showMessageDialog(this, "Uma tela do menu de clientes já está aberta. \nFeche-a para abrir outra!");
         }
     }//GEN-LAST:event_btnIncluirClienteActionPerformed
 
@@ -215,54 +230,45 @@ public class TelaCliente extends javax.swing.JFrame
     }//GEN-LAST:event_formWindowClosed
 
     private void campoPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPesquisaClienteActionPerformed
-        if (campoPesquisaCliente.getText().equalsIgnoreCase("Código ou nome do cliente") || campoPesquisaCliente.getText().equalsIgnoreCase("")) 
-        {
-            try
-            {
-                Banco.abrirConexao();
-                ResultSet resp = Banco.buscarClientesPorNome("");
-                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
-                Banco.fecharConexao();
-            } 
-            catch (SQLException | LtpUtilException e)
-            {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
-        }
-        else if (soNumericos(campoPesquisaCliente.getText().toUpperCase()) == true)
-        {
-            try
-            {
-                Banco.abrirConexao();
-                ResultSet resp = Banco.buscarClientesPorCod(Integer.parseInt(campoPesquisaCliente.getText()));
-                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
-                Banco.fecharConexao();
-            }
-            catch (SQLException | LtpUtilException e)
-            {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
-        }
-        else
-        {
-            try
-            {
-                Banco.abrirConexao();
-                ResultSet resp = Banco.buscarClientesPorNome(campoPesquisaCliente.getText());
-                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
-                Banco.fecharConexao();
-            } 
-            catch (SQLException | LtpUtilException e)
-            {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
-        }
+        efetuarPesquisa();
         
     }//GEN-LAST:event_campoPesquisaClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
-        // TODO add your handling code here:
+        if (!mostrandoTelaExcluirCliente && !mostrandoTelaAlterarCliente && !mostrandoTelaIncluirCliente) 
+        {
+            try 
+            {
+                new TelaClienteExcluir().setVisible(true);
+            } catch (ParseException ex) 
+            {
+                Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mostrandoTelaExcluirCliente = true;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Uma tela do menu de clientes já está aberta. \nFeche-a para abrir outra!");
+        }
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
+
+    private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
+        if (!mostrandoTelaExcluirCliente && !mostrandoTelaAlterarCliente && !mostrandoTelaIncluirCliente) 
+        {
+            try 
+            {
+                new TelaClienteAlterar().setVisible(true);
+            } catch (ParseException ex) 
+            {
+                Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mostrandoTelaAlterarCliente = true;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Uma tela do menu de clientes já está aberta. \nFeche-a para abrir outra!");
+        }
+    }//GEN-LAST:event_btnAlterarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,8 +310,11 @@ public class TelaCliente extends javax.swing.JFrame
 
     //Flags
     public static boolean mostrandoTelaIncluirCliente = false;
+    public static boolean mostrandoTelaExcluirCliente = false;
+    public static boolean mostrandoTelaAlterarCliente = false;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterarCliente;
     private javax.swing.JButton btnExcluirCliente;
     private javax.swing.JButton btnIncluirCliente;
     private javax.swing.JButton btnPesquisaCliente;
@@ -316,15 +325,51 @@ public class TelaCliente extends javax.swing.JFrame
     private javax.swing.JMenuBar menuBarCliente;
     // End of variables declaration//GEN-END:variables
 
-    private boolean soNumericos(String validacao)
+    private void efetuarPesquisa() 
     {
-        for (int i = 0; i < validacao.length(); i++)
+        if (campoPesquisaCliente.getText().equalsIgnoreCase("Código ou nome do cliente") || campoPesquisaCliente.getText().equalsIgnoreCase("")) 
         {
-            if(validacao.charAt(i) < 48 || validacao.charAt(i) > 57)
+            try
             {
-                return false;
+                Banco.abrirConexao();
+                ResultSet resp = Banco.buscarClientesPorNome("");
+                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
+                Banco.fecharConexao();
+            } 
+            catch (SQLException | LtpUtilException e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
         }
-        return true;
+        else if (Utilitarios.soNumericos(campoPesquisaCliente.getText().toUpperCase()) == true)
+        {
+            try
+            {
+                Banco.abrirConexao();
+                ResultSet resp = Banco.buscarClientesPorCod(Integer.parseInt(campoPesquisaCliente.getText()));
+                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
+                Banco.fecharConexao();
+            }
+            catch (SQLException | LtpUtilException e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }
+        else
+        {
+            try
+            {
+                Banco.abrirConexao();
+                ResultSet resp = Banco.buscarClientesPorNome(campoPesquisaCliente.getText());
+                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
+                Banco.fecharConexao();
+            } 
+            catch (SQLException | LtpUtilException e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }
     }
+
+    
 }

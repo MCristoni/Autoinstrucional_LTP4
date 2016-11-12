@@ -28,6 +28,20 @@ public class Cliente
         this.email = email;
         this.data = data;
     }
+    
+    public Cliente(int cod, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email, Date data) 
+    {
+        this.cod = cod;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.cep = cep;
+        this.telefone = telefone;
+        this.email = email;
+        this.data = data;
+    }
 
     public int getCod() 
     {
