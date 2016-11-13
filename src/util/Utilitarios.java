@@ -14,6 +14,7 @@ import java.util.Calendar;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
+import produtos.BancoProduto;
 import utilitarios.LtpUtil;
 
 /**
@@ -97,7 +98,7 @@ public class Utilitarios
         }
         for (int i = 0; i < validacao.length(); i++)
         {
-            if(validacao.charAt(i) < 48 || validacao.charAt(i) > 57)
+            if((validacao.charAt(i) < 48 || validacao.charAt(i) > 57) && validacao.charAt(i) != '.')
             {
                 return false;
             }
@@ -105,7 +106,7 @@ public class Utilitarios
         return true;
     }
     
-    public static ArrayList<String> inicializarComboBox() 
+    public static ArrayList<String> inicializarComboBoxEstados() 
     {
         ArrayList<String> uf = new ArrayList<>();
         
@@ -120,6 +121,23 @@ public class Utilitarios
             System.out.println(e.getMessage());
         }
         return uf;
+    }
+    
+    public static ArrayList<String> inicializarComboBoxUnidades() 
+    {
+        ArrayList<String> tipos = new ArrayList<>();
+        
+        try 
+        {
+            BancoConexoes.abrirConexao();
+            tipos = BancoProduto.recuperarUnidades();
+            BancoConexoes.fecharConexao();
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+        }
+        return tipos;
     }
     
     public static Date descobrirDataDate()
@@ -139,7 +157,7 @@ public class Utilitarios
         String resp = "";
         
         //Valida Nome
-        if(campoNome.getText().equals("Mínimo de 2 nomes") || campoNome.getText().length() > 40 || campoNome.getText().trim().equals(""))
+        if(campoNome.getText().equals("Campo obrigatório") || campoNome.getText().length() > 40 || campoNome.getText().trim().equals(""))
         {            
             resp += "Nome\n";
         }
@@ -221,5 +239,30 @@ public class Utilitarios
             }
         }
         return 0;
+    }
+
+    public static String validarEntradas(JTextField campoNome, JComboBox<String> campoTipo, JTextField campoPreco)
+    {
+        String resp = "";
+        
+        //Valida nome produto
+        if(campoNome.getText().equals("Campo obrigatório") || campoNome.getText().length() > 50 || campoNome.getText().trim().equals(""))
+        {            
+            resp += "Nome\n";
+        }
+        
+        //Valida tipo
+        if(campoTipo.getSelectedItem().equals("Selecione"))
+        {
+            resp += "Tipo\n";
+        }
+        
+        //Valida preco
+        if (campoPreco.getText().trim().equals("") || !soNumericos(campoPreco.getText())) 
+        {
+            resp += "Preço";
+        }
+        
+        return resp;
     }
 }

@@ -6,7 +6,6 @@
 package clientes;
 
 import banco.BancoConexoes;
-import dados.Cliente;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class TelaClienteAlterar extends javax.swing.JFrame
         jPanel1.requestFocus();
         GhostText ghostText = new GhostText(campoCodAC, "Entre com o código do cliente que deseja alterar e aperte enter");
         
-        uf = Utilitarios.inicializarComboBox();
+        uf = Utilitarios.inicializarComboBoxEstados();
         campoUfAC.setModel(new DefaultComboBoxModel(new Vector(uf)));
     }
 
@@ -95,7 +94,6 @@ public class TelaClienteAlterar extends javax.swing.JFrame
 
         jLabel10.setText("Data inclusão:");
 
-        campoDataAC.setForeground(new java.awt.Color(51, 51, 51));
         campoDataAC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campoDataAC.setEnabled(false);
         campoDataAC.setFocusable(false);
@@ -322,7 +320,7 @@ public class TelaClienteAlterar extends javax.swing.JFrame
             try
             {
                BancoConexoes.abrirConexao();
-               cliente = BancoCliente.buscarClientesCod(Integer.parseInt(campoCodAC.getText()));
+               cliente = BancoCliente.buscarClientesCodCliente(Integer.parseInt(campoCodAC.getText()));
                BancoConexoes.fecharConexao();
                
                 if (cliente != null) 
@@ -362,8 +360,6 @@ public class TelaClienteAlterar extends javax.swing.JFrame
                     campoEmailAC.setEnabled(true);
                     
                     campoDataAC.setText(LtpUtil.formatarData(cliente.getData(), "dd/MM/yyyy"));
-                    campoDataAC.setFocusable(true);
-                    campoDataAC.setEnabled(true);
                     
                     btnAlterarCliente.setEnabled(true);
                 }

@@ -6,7 +6,6 @@
 package clientes;
 
 import banco.BancoConexoes;
-import dados.Cliente;
 import java.sql.SQLException;
 import java.text.ParseException;
 import javax.swing.JOptionPane;
@@ -274,7 +273,7 @@ public class TelaClienteExcluir extends javax.swing.JFrame
             try
             {
                BancoConexoes.abrirConexao();
-               Cliente cliente = BancoCliente.buscarClientesCod(Integer.parseInt(campoCodEC.getText()));
+               Cliente cliente = BancoCliente.buscarClientesCodCliente(Integer.parseInt(campoCodEC.getText()));
                BancoConexoes.fecharConexao();
                
                 if (cliente != null) 

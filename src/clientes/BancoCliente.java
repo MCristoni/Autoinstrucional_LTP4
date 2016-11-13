@@ -6,7 +6,6 @@
 package clientes;
 
 import static banco.BancoConexoes.con;
-import dados.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,14 +72,14 @@ public class BancoCliente
         return pstm.executeQuery();
     }
     
-    public static ResultSet buscarClientesPorCod (int cod) throws SQLException 
+    public static ResultSet buscarClientesCodResult (int cod) throws SQLException 
     {
         PreparedStatement pstm = con.prepareStatement("Select * from CLIENTES where CODCLIENTE like ?");
         pstm.setInt(1, cod);
         return pstm.executeQuery();
     }
     
-    public static Cliente buscarClientesCod (int cod) throws SQLException
+    public static Cliente buscarClientesCodCliente (int cod) throws SQLException
     {
         PreparedStatement sql = con.prepareStatement("Select * from CLIENTES where CODCLIENTE like ?");
         sql.setInt(1, cod);

@@ -6,6 +6,7 @@
 package clientes;
 
 //import Utilitarios.HintTextFieldUI;
+import principal.TelaPrincipal;
 import banco.BancoConexoes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,7 +61,7 @@ public class TelaCliente extends javax.swing.JFrame
         jTablePesq = new javax.swing.JTable();
         menuBarCliente = new javax.swing.JMenuBar();
 
-        btnIncluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/userIncluir.png"))); // NOI18N
+        btnIncluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         btnIncluirCliente.setActionCommand("Incluir");
         btnIncluirCliente.setLabel("  Incluir");
         btnIncluirCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
@@ -73,7 +74,7 @@ public class TelaCliente extends javax.swing.JFrame
             }
         });
 
-        btnExcluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/userExcluir.png"))); // NOI18N
+        btnExcluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/substract.png"))); // NOI18N
         btnExcluirCliente.setText("  Excluir");
         btnExcluirCliente.setActionCommand("Excluir");
         btnExcluirCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
@@ -86,7 +87,7 @@ public class TelaCliente extends javax.swing.JFrame
             }
         });
 
-        btnAlterarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/userExcluir.png"))); // NOI18N
+        btnAlterarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/shuffle.png"))); // NOI18N
         btnAlterarCliente.setText("  Alterar");
         btnAlterarCliente.setToolTipText("");
         btnAlterarCliente.setActionCommand("Alterar");
@@ -155,7 +156,8 @@ public class TelaCliente extends javax.swing.JFrame
         });
         jTablePesq.setGridColor(new java.awt.Color(0, 0, 0));
         jTablePesq.setRowHeight(20);
-        jTablePesq.setShowGrid(true);
+        jTablePesq.setShowHorizontalLines(true);
+        jTablePesq.setShowVerticalLines(true);
         jScrollPane2.setViewportView(jTablePesq);
         if (jTablePesq.getColumnModel().getColumnCount() > 0) {
             jTablePesq.getColumnModel().getColumn(0).setResizable(false);
@@ -335,10 +337,10 @@ public class TelaCliente extends javax.swing.JFrame
             {
                 BancoConexoes.abrirConexao();
                 ResultSet resp = BancoCliente.buscarClientesPorNome("");
-                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
+                LtpUtil.loadFormatJTable(jTablePesq, resp, false);
                 BancoConexoes.fecharConexao();
             } 
-            catch (SQLException | LtpUtilException e)
+            catch (SQLException e)
             {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -348,11 +350,11 @@ public class TelaCliente extends javax.swing.JFrame
             try
             {
                 BancoConexoes.abrirConexao();
-                ResultSet resp = BancoCliente.buscarClientesPorCod(Integer.parseInt(campoPesquisaCliente.getText()));
-                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
+                ResultSet resp = BancoCliente.buscarClientesCodResult(Integer.parseInt(campoPesquisaCliente.getText()));
+                LtpUtil.loadFormatJTable(jTablePesq, resp, false);
                 BancoConexoes.fecharConexao();
             }
-            catch (SQLException | LtpUtilException e)
+            catch (SQLException e)
             {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -363,10 +365,10 @@ public class TelaCliente extends javax.swing.JFrame
             {
                 BancoConexoes.abrirConexao();
                 ResultSet resp = BancoCliente.buscarClientesPorNome(campoPesquisaCliente.getText());
-                LtpUtil.loadFormatJTable(jScrollPane2, resp, false);
+                LtpUtil.loadFormatJTable(jTablePesq, resp, false);
                 BancoConexoes.fecharConexao();
             } 
-            catch (SQLException | LtpUtilException e)
+            catch (SQLException e)
             {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }

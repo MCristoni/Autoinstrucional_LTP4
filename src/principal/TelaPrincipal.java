@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientes;
+package principal;
 
+import clientes.TelaCliente;
 import javax.swing.JOptionPane;
+import produtos.TelaProduto;
 
 /**
  *
@@ -135,12 +137,18 @@ public class TelaPrincipal extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(this, "Uma tela do menu principal já está aberta. \nFeche-a para abrir outra!");
         }
-        
-        
     }//GEN-LAST:event_BtnClientesActionPerformed
 
     private void BtnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnProdutosActionPerformed
-        // TODO add your handling code here:
+        if (!mostrandoTelaClientes && !mostrandoTelaProdutos && !mostrandoTelaVendas && !mostrandoTelaVendedores) 
+        {
+            new TelaProduto().setVisible(true);
+            mostrandoTelaProdutos = true;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Uma tela do menu principal já está aberta. \nFeche-a para abrir outra!");
+        }
     }//GEN-LAST:event_BtnProdutosActionPerformed
 
     private void BtnClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnClientesMouseClicked

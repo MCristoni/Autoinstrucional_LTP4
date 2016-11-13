@@ -6,7 +6,6 @@
 package clientes;
 
 import banco.BancoConexoes;
-import dados.Cliente;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class TelaClienteIncluir extends javax.swing.JFrame
     {
         initComponents();
         jPanel1.requestFocus();
-        ArrayList<String> uf = Utilitarios.inicializarComboBox();
+        ArrayList<String> uf = Utilitarios.inicializarComboBoxEstados();
         campoUfIC.setModel(new DefaultComboBoxModel(new Vector(uf)));
         campoDataIC.setText(Utilitarios.descobrirDataString());
         setarMascaras();
@@ -97,6 +96,8 @@ public class TelaClienteIncluir extends javax.swing.JFrame
         jLabel10.setText("Data inclusão:");
 
         campoDataIC.setForeground(new java.awt.Color(51, 51, 51));
+        campoDataIC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoDataIC.setEnabled(false);
         campoDataIC.setFocusable(false);
         campoDataIC.setRequestFocusEnabled(false);
 

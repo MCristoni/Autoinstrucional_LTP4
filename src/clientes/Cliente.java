@@ -1,4 +1,4 @@
-package dados;
+package clientes;
 
 
 import java.sql.Date;
