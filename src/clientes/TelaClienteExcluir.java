@@ -8,10 +8,13 @@ package clientes;
 import banco.BancoConexoes;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import util.GhostText;
 import util.Utilitarios;
 import utilitarios.LtpUtil;
+import vendas.BancoVendas;
 
 /**
  *
@@ -318,30 +321,37 @@ public class TelaClienteExcluir extends javax.swing.JFrame
     }//GEN-LAST:event_campoCodECActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
-
-        int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir esse cliente?", "Confirmar exclusão", JOptionPane.INFORMATION_MESSAGE);
-
-        if (opcao == JOptionPane.YES_OPTION)
+        
+        try 
         {
-            try
+            BancoConexoes.abrirConexao();
+            if(BancoVendas.verificarExistenciaVendasClientes(Integer.parseInt(campoCodEC.getText())))
             {
-                BancoConexoes.abrirConexao();
-                String retorno = BancoCliente.excluirCliente(Integer.parseInt(campoCodEC.getText()));
-                if (retorno.equals(""))
-                {
-                    JOptionPane.showMessageDialog(this, "Cliente '" + campoNomeEC.getText() + "' excluído!", "Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(this, "Algo deu errado!\n" + retorno, "Operação falhou", JOptionPane.INFORMATION_MESSAGE);
-                }
-                BancoConexoes.fecharConexao();
-                dispose();
+                JOptionPane.showMessageDialog(this, "Não é possível excluir clientes com vendas cadastradas", "Erro ao excluir", JOptionPane.INFORMATION_MESSAGE);
             }
-            catch (SQLException ex)
+            else
             {
-                JOptionPane.showMessageDialog(this, ex);
+                int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir esse cliente?", "Confirmar exclusão", JOptionPane.INFORMATION_MESSAGE);
+
+                if (opcao == JOptionPane.YES_OPTION)
+                {
+                    String retorno = BancoCliente.excluirCliente(Integer.parseInt(campoCodEC.getText()));
+                    if (retorno.equals(""))
+                    {
+                        JOptionPane.showMessageDialog(this, "Cliente '" + campoNomeEC.getText() + "' excluído!", "Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(this, "Algo deu errado!\n" + retorno, "Operação falhou", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    dispose();
+                }
             }
+            BancoConexoes.fecharConexao();
+        } 
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(this, ex);
         }
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 

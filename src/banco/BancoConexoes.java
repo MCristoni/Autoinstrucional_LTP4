@@ -14,7 +14,7 @@ public class BancoConexoes
         String mac = "jdbc:firebirdsql:Matheus:/Users/usuario/Desktop/Auto Instrucional TLP4/Banco/Mac/BDVENDAS.GDB";
         String pc = "jdbc:firebirdsql:DesktopMatheus:E:\\Auto Instrucional TLP4\\banco\\Win\\BDVendas2.GDB";
             DriverManager.registerDriver(new FBDriver());
-            con = DriverManager.getConnection(pc, "SYSDBA", "masterkey");
+            con = DriverManager.getConnection(mac, "SYSDBA", "masterkey");
             System.err.println("Conexao aberta");
     }
 
