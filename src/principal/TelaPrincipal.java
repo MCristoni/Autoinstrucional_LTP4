@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import produtos.TelaProduto;
+import vendas.TelaVendas;
 import vendedores.TelaVendedor;
 
 public class TelaPrincipal extends javax.swing.JFrame 
@@ -49,6 +50,11 @@ public class TelaPrincipal extends javax.swing.JFrame
 
         BtnVendas.setText("Menu Vendas");
         BtnVendas.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        BtnVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVendasActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/coin-money-6 2.png"))); // NOI18N
         jLabel1.setMinimumSize(new java.awt.Dimension(100, 100));
@@ -148,6 +154,18 @@ public class TelaPrincipal extends javax.swing.JFrame
             JOptionPane.showMessageDialog(this, "Uma tela do menu principal já está aberta. \nFeche-a para abrir outra!");
         }
     }//GEN-LAST:event_btnVendedoresActionPerformed
+
+    private void BtnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVendasActionPerformed
+        if (!mostrandoTelaClientes && !mostrandoTelaProdutos && !mostrandoTelaVendas && !mostrandoTelaVendedores) 
+        {
+            new TelaVendas().setVisible(true);
+            mostrandoTelaVendas = true;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Uma tela do menu principal já está aberta. \nFeche-a para abrir outra!");
+        }
+    }//GEN-LAST:event_BtnVendasActionPerformed
 
     public static void main(String args[]) 
     {

@@ -23,4 +23,17 @@ public class BancoVendas
         ResultSet resp = pstm.executeQuery();
         return resp.next();
     }
+    
+    public static ResultSet buscarTodasVendas () throws SQLException 
+    {
+        PreparedStatement pstm = con.prepareStatement("select CODVENDA, NOME_VENDEDOR \"VENDEDOR\", NOME \"CLIENTE\", DATA_VENDA \"DATA VENDA\"  from vendas inner join vendedores on VENDEDORES.COD_VENDEDOR = vendas.COD_VENDEDOR inner join CLIENTES on clientes.CODCLIENTE = vendas.CODCLIENTE");
+        return pstm.executeQuery();
+    }
+    
+    public static ResultSet buscarVendasCodResult (int cod) throws SQLException 
+    {
+        PreparedStatement pstm = con.prepareStatement("select CODVENDA, NOME_VENDEDOR \"VENDEDOR\", NOME \"CLIENTE\", DATA_VENDA \"DATA VENDA\"  from vendas inner join vendedores on VENDEDORES.COD_VENDEDOR = vendas.COD_VENDEDOR inner join CLIENTES on clientes.CODCLIENTE = vendas.CODCLIENTE where CODVENDA = ?");
+        pstm.setInt(1, cod);
+        return pstm.executeQuery();
+    }
 }
