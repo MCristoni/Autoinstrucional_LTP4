@@ -23,6 +23,7 @@ public class TelaProduto extends javax.swing.JFrame
         menuBarCliente.add(btnIncluirProduto);
         menuBarCliente.add(btnExcluirProduto);
         menuBarCliente.add(btnAlterarProduto);
+        menuBarCliente.add(btnRelatorioProduto);
     }
     
     @SuppressWarnings("unchecked")
@@ -32,6 +33,7 @@ public class TelaProduto extends javax.swing.JFrame
         btnIncluirProduto = new javax.swing.JButton();
         btnExcluirProduto = new javax.swing.JButton();
         btnAlterarProduto = new javax.swing.JButton();
+        btnRelatorioProduto = new javax.swing.JButton();
         btnPesquisaProduto = new javax.swing.JButton();
         campoPesquisaProduto = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -76,6 +78,20 @@ public class TelaProduto extends javax.swing.JFrame
         btnAlterarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarProdutoActionPerformed(evt);
+            }
+        });
+
+        btnRelatorioProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/newspaper.png"))); // NOI18N
+        btnRelatorioProduto.setText(" Relatório");
+        btnRelatorioProduto.setToolTipText("");
+        btnRelatorioProduto.setActionCommand("Relatorio");
+        btnRelatorioProduto.setMargin(new java.awt.Insets(0, -10, 0, -5));
+        btnRelatorioProduto.setMaximumSize(new java.awt.Dimension(95, 35));
+        btnRelatorioProduto.setMinimumSize(new java.awt.Dimension(95, 35));
+        btnRelatorioProduto.setPreferredSize(new java.awt.Dimension(95, 35));
+        btnRelatorioProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioProdutoActionPerformed(evt);
             }
         });
 
@@ -253,6 +269,10 @@ public class TelaProduto extends javax.swing.JFrame
         }
     }//GEN-LAST:event_btnAlterarProdutoActionPerformed
 
+    private void btnRelatorioProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRelatorioProdutoActionPerformed
+
     public static void main(String args[]) 
     {
         java.awt.EventQueue.invokeLater(() -> {
@@ -269,6 +289,7 @@ public class TelaProduto extends javax.swing.JFrame
     private javax.swing.JButton btnExcluirProduto;
     private javax.swing.JButton btnIncluirProduto;
     private javax.swing.JButton btnPesquisaProduto;
+    private javax.swing.JButton btnRelatorioProduto;
     private javax.swing.JTextField campoPesquisaProduto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;

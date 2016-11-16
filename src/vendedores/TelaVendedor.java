@@ -24,6 +24,7 @@ public class TelaVendedor extends javax.swing.JFrame
         menuBarVendedor.add(btnIncluirVendedor);
         menuBarVendedor.add(btnExcluirVendedor);
         menuBarVendedor.add(btnAlterarVendedor);
+        menuBarVendedor.add(btnRelatorioVendedor);
     }
     
     @SuppressWarnings("unchecked")
@@ -33,6 +34,7 @@ public class TelaVendedor extends javax.swing.JFrame
         btnIncluirVendedor = new javax.swing.JButton();
         btnExcluirVendedor = new javax.swing.JButton();
         btnAlterarVendedor = new javax.swing.JButton();
+        btnRelatorioVendedor = new javax.swing.JButton();
         btnPesquisaVendedor = new javax.swing.JButton();
         campoPesquisaVendedor = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -77,6 +79,20 @@ public class TelaVendedor extends javax.swing.JFrame
         btnAlterarVendedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarVendedorActionPerformed(evt);
+            }
+        });
+
+        btnRelatorioVendedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/newspaper.png"))); // NOI18N
+        btnRelatorioVendedor.setText(" Relatório");
+        btnRelatorioVendedor.setToolTipText("");
+        btnRelatorioVendedor.setActionCommand("Relatorio");
+        btnRelatorioVendedor.setMargin(new java.awt.Insets(0, -10, 0, -5));
+        btnRelatorioVendedor.setMaximumSize(new java.awt.Dimension(95, 35));
+        btnRelatorioVendedor.setMinimumSize(new java.awt.Dimension(95, 35));
+        btnRelatorioVendedor.setPreferredSize(new java.awt.Dimension(95, 35));
+        btnRelatorioVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioVendedorActionPerformed(evt);
             }
         });
 
@@ -252,6 +268,10 @@ public class TelaVendedor extends javax.swing.JFrame
         TelaPrincipal.mostrandoTelaVendedores = false;
     }//GEN-LAST:event_formWindowClosed
 
+    private void btnRelatorioVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioVendedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRelatorioVendedorActionPerformed
+
     public static void main(String args[]) 
     {
         java.awt.EventQueue.invokeLater(() -> {
@@ -269,6 +289,7 @@ public class TelaVendedor extends javax.swing.JFrame
     private javax.swing.JButton btnExcluirVendedor;
     private javax.swing.JButton btnIncluirVendedor;
     private javax.swing.JButton btnPesquisaVendedor;
+    private javax.swing.JButton btnRelatorioVendedor;
     private javax.swing.JTextField campoPesquisaVendedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;

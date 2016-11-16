@@ -75,6 +75,31 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlterarVendedorActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JButton" name="btnRelatorioVendedor">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagens/newspaper.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value=" Relat&#xf3;rio"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="actionCommand" type="java.lang.String" value="Relatorio"/>
+        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[0, -10, 0, -5]"/>
+        </Property>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[95, 35]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[95, 35]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[95, 35]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioVendedorActionPerformed"/>
+      </Events>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="menuBarVendedor">
       <Properties>
         <Property name="name" type="java.lang.String" value="" noResource="true"/>

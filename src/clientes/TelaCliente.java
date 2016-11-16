@@ -22,6 +22,7 @@ public class TelaCliente extends javax.swing.JFrame
         menuBarCliente.add(btnIncluirCliente);
         menuBarCliente.add(btnExcluirCliente);
         menuBarCliente.add(btnAlterarCliente);
+        menuBarCliente.add(btnRelatorioCliente);
     }
     
     @SuppressWarnings("unchecked")
@@ -31,6 +32,7 @@ public class TelaCliente extends javax.swing.JFrame
         btnIncluirCliente = new javax.swing.JButton();
         btnExcluirCliente = new javax.swing.JButton();
         btnAlterarCliente = new javax.swing.JButton();
+        btnRelatorioCliente = new javax.swing.JButton();
         btnPesquisaCliente = new javax.swing.JButton();
         campoPesquisaCliente = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -75,6 +77,20 @@ public class TelaCliente extends javax.swing.JFrame
         btnAlterarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarClienteActionPerformed(evt);
+            }
+        });
+
+        btnRelatorioCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/newspaper.png"))); // NOI18N
+        btnRelatorioCliente.setText(" Relatório");
+        btnRelatorioCliente.setToolTipText("");
+        btnRelatorioCliente.setActionCommand("Relatorio");
+        btnRelatorioCliente.setMargin(new java.awt.Insets(0, -10, 0, -5));
+        btnRelatorioCliente.setMaximumSize(new java.awt.Dimension(95, 35));
+        btnRelatorioCliente.setMinimumSize(new java.awt.Dimension(95, 35));
+        btnRelatorioCliente.setPreferredSize(new java.awt.Dimension(95, 35));
+        btnRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioClienteActionPerformed(evt);
             }
         });
 
@@ -251,6 +267,10 @@ public class TelaCliente extends javax.swing.JFrame
         }
     }//GEN-LAST:event_btnAlterarClienteActionPerformed
 
+    private void btnRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRelatorioClienteActionPerformed
+
     public static void main(String args[]) 
     {
         java.awt.EventQueue.invokeLater(() -> {
@@ -268,6 +288,7 @@ public class TelaCliente extends javax.swing.JFrame
     private javax.swing.JButton btnExcluirCliente;
     private javax.swing.JButton btnIncluirCliente;
     private javax.swing.JButton btnPesquisaCliente;
+    private javax.swing.JButton btnRelatorioCliente;
     private javax.swing.JTextField campoPesquisaCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
