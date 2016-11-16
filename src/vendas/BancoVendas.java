@@ -13,13 +13,14 @@ public class BancoVendas
         PreparedStatement pstm = con.prepareStatement("select codcliente from vendas where codcliente = ?");
         pstm.setInt(1, cod);
         ResultSet resp = pstm.executeQuery();
-        if (resp.next()) 
-        {
-            return true;
-        }
-        else
-        {
-            return  false;
-        }
+        return resp.next();
+    }
+    
+    public static boolean verificarExistenciaVendasVendedores(int cod) throws SQLException 
+    {
+        PreparedStatement pstm = con.prepareStatement("select cod_vendedor from vendas where cod_vendedor = ?");
+        pstm.setInt(1, cod);
+        ResultSet resp = pstm.executeQuery();
+        return resp.next();
     }
 }

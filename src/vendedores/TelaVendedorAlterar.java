@@ -1,49 +1,46 @@
-package produtos;
+package vendedores;
 
 import banco.BancoConexoes;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import util.GhostText;
 import util.Utilitarios;
 import utilitarios.LtpUtil;
 
-public class TelaProdutoAlterar extends javax.swing.JFrame 
+/**
+ *
+ * @author usuario
+ */
+public class TelaVendedorAlterar extends javax.swing.JFrame 
 {
-    private Produto produto = null;
-    private final ArrayList<String> tipo;
-    public TelaProdutoAlterar() throws ParseException
+    private Vendedor vendedor = null;
+    private GhostText ghostText;
+    
+    public TelaVendedorAlterar() throws ParseException
     {
         initComponents();
         jPanel1.requestFocus();
-        
-        tipo = Utilitarios.inicializarComboBoxUnidades();
-        campoTipoAP.setModel(new DefaultComboBoxModel(new Vector(tipo)));
+        setarMascaras();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        campoDataAP = new javax.swing.JTextField();
-        campoPrecoAP = new javax.swing.JTextField();
-        campoNomeAP = new javax.swing.JTextField();
+        campoDataAVendedor = new javax.swing.JTextField();
+        campoNomeAVendedor = new javax.swing.JTextField();
         btnAlterarProduto = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        campoCodAP = new javax.swing.JTextField();
-        campoTipoAP = new javax.swing.JComboBox<>();
+        campoCodAVendedor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Alterar Produto");
+        setTitle("Alterar Vendedor");
         setLocation(new java.awt.Point(0, 0));
-        setMinimumSize(new java.awt.Dimension(576, 276));
+        setMinimumSize(new java.awt.Dimension(576, 180));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -52,24 +49,16 @@ public class TelaProdutoAlterar extends javax.swing.JFrame
 
         jLabel2.setText("Nome:");
 
-        jLabel6.setText("Tipo:");
-
-        jLabel9.setText("Preço:");
-
         jLabel10.setText("Data cadastro:");
 
-        campoDataAP.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        campoDataAP.setEnabled(false);
-        campoDataAP.setFocusable(false);
-        campoDataAP.setRequestFocusEnabled(false);
+        campoDataAVendedor.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoDataAVendedor.setEnabled(false);
+        campoDataAVendedor.setFocusable(false);
+        campoDataAVendedor.setRequestFocusEnabled(false);
 
-        campoPrecoAP.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        campoPrecoAP.setEnabled(false);
-        campoPrecoAP.setFocusable(false);
-
-        campoNomeAP.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        campoNomeAP.setEnabled(false);
-        campoNomeAP.setFocusable(false);
+        campoNomeAVendedor.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoNomeAVendedor.setEnabled(false);
+        campoNomeAVendedor.setFocusable(false);
 
         btnAlterarProduto.setText("Alterar");
         btnAlterarProduto.setEnabled(false);
@@ -92,14 +81,11 @@ public class TelaProdutoAlterar extends javax.swing.JFrame
 
         jLabel1.setText("Código:");
 
-        campoCodAP.addActionListener(new java.awt.event.ActionListener() {
+        campoCodAVendedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoCodAPActionPerformed(evt);
+                campoCodAVendedorActionPerformed(evt);
             }
         });
-
-        campoTipoAP.setEnabled(false);
-        campoTipoAP.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,25 +101,17 @@ public class TelaProdutoAlterar extends javax.swing.JFrame
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoDataAP)
-                                    .addComponent(campoPrecoAP)))
+                                .addComponent(campoDataAVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoCodAP)
-                                    .addComponent(campoNomeAP)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(campoTipoAP, 0, 454, Short.MAX_VALUE)))))
+                                    .addComponent(campoCodAVendedor)
+                                    .addComponent(campoNomeAVendedor))))))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
@@ -142,23 +120,15 @@ public class TelaProdutoAlterar extends javax.swing.JFrame
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(campoCodAP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoCodAVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(campoNomeAP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(campoTipoAP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(campoPrecoAP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNomeAVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(campoDataAP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoDataAVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,27 +142,25 @@ public class TelaProdutoAlterar extends javax.swing.JFrame
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         //Quando a tela de alteração de clientes for fechada, mudar a flag que evita a abertura de várias para falso.
-        TelaProduto.mostrandoTelaAlterarProdutos = false;
+        TelaVendedor.mostrandoTelaAlterarVendedor = false;
     }//GEN-LAST:event_formWindowClosed
 
     private void btnAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarProdutoActionPerformed
         String camposInvalidos = validarEntradas();
         if(camposInvalidos.equals(""))
         {
-            int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente alterar esse produto?", "Confirmar alteração", JOptionPane.INFORMATION_MESSAGE);
+            int opcao = JOptionPane.showConfirmDialog(this, "Deseja realmente alterar esse vendedor?", "Confirmar alteração", JOptionPane.INFORMATION_MESSAGE);
 
             if (opcao == JOptionPane.YES_OPTION)
             {
-                produto.setProduto(campoNomeAP.getText().toUpperCase());
-                produto.setCodUnidade(campoTipoAP.getSelectedIndex());
-                produto.setPreco(Double.parseDouble(campoPrecoAP.getText()));
+                vendedor.setNomeVendedor(campoNomeAVendedor.getText().toUpperCase());
                 try
                 {
                     BancoConexoes.abrirConexao();
-                    String retorno = BancoProduto.alterarProduto(produto);
+                    String retorno = BancoVendedor.alterarVendedor(vendedor);
                     if (retorno.equals("")) 
                     {
-                        JOptionPane.showMessageDialog(this, "Produto '" + campoNomeAP.getText() + "' alterado!", "Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Vendedor '" + campoNomeAVendedor.getText().toUpperCase() + "' alterado!", "Operação realizada com sucesso", JOptionPane.INFORMATION_MESSAGE);
                     }
                     else
                     {
@@ -213,55 +181,39 @@ public class TelaProdutoAlterar extends javax.swing.JFrame
         }
     }//GEN-LAST:event_btnAlterarProdutoActionPerformed
 
-    private void campoCodAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCodAPActionPerformed
+    private void campoCodAVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCodAVendedorActionPerformed
         
-        if (!campoCodAP.getText().equalsIgnoreCase("Entre com o código do produto que deseja alterar e aperte enter") && Utilitarios.soNumericos(campoCodAP.getText()))
+        if (!campoCodAVendedor.getText().equalsIgnoreCase("Entre com o código do vendedor que deseja alterar e aperte enter") && Utilitarios.soNumericos(campoCodAVendedor.getText()))
         {
             try
             {
                BancoConexoes.abrirConexao();
-               produto = BancoProduto.buscarProdutosCodProduto(Integer.parseInt(campoCodAP.getText()));
+               vendedor = BancoVendedor.buscarVendedoresCodVendedor(Integer.parseInt(campoCodAVendedor.getText()));
                BancoConexoes.fecharConexao();
                
-                if (produto != null) 
+                if (vendedor != null) 
                 {                    
-                    campoNomeAP.setText(produto.getProduto());
-                    campoNomeAP.setFocusable(true);
-                    campoNomeAP.setEnabled(true);
+                    campoNomeAVendedor.setText(vendedor.getNomeVendedor());
+                    campoNomeAVendedor.setFocusable(true);
+                    campoNomeAVendedor.setEnabled(true);
                     
-                    campoTipoAP.setSelectedIndex(produto.getCodUnidade());
-                    campoTipoAP.setFocusable(true);
-                    campoTipoAP.setEnabled(true);
-                    
-                    campoPrecoAP.setText(produto.getPreco()+"");
-                    campoPrecoAP.setFocusable(true);
-                    campoPrecoAP.setEnabled(true);
-
-                    campoDataAP.setText(LtpUtil.formatarData(produto.getDataPreco(), "dd/MM/yyyy"));
-                    campoDataAP.setEnabled(false);
+                    campoDataAVendedor.setText(LtpUtil.formatarData(vendedor.getDataCadVendedor(), "dd/MM/yyyy"));
+                    campoDataAVendedor.setEnabled(false);
 
                     btnAlterarProduto.setEnabled(true);
                 }
                 else
                 {
-                    campoNomeAP.setText("");
-                    campoNomeAP.setFocusable(false);
-                    campoNomeAP.setEnabled(false);
+                    campoNomeAVendedor.setText("");
+                    campoNomeAVendedor.setFocusable(false);
+                    campoNomeAVendedor.setEnabled(false);
                     
-                    campoTipoAP.setSelectedIndex(0);
-                    campoTipoAP.setFocusable(false);
-                    campoTipoAP.setEnabled(false);
-                    
-                    campoPrecoAP.setText("");
-                    campoPrecoAP.setFocusable(false);
-                    campoPrecoAP.setEnabled(false);
-                    
-                    campoDataAP.setText(LtpUtil.formatarData(produto.getDataPreco(), "dd/MM/yyyy"));
-                    campoDataAP.setFocusable(false);
-                    campoDataAP.setEnabled(false);
+                    campoDataAVendedor.setText(LtpUtil.formatarData(vendedor.getDataCadVendedor(), "dd/MM/yyyy"));
+                    campoDataAVendedor.setFocusable(false);
+                    campoDataAVendedor.setEnabled(false);
                     
                     btnAlterarProduto.setEnabled(false);
-                    JOptionPane.showMessageDialog(this, "Produto não encontrado!\nVerifique o código digitado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Vendedor não encontrado!\nVerifique o código digitado!", "Erro", JOptionPane.INFORMATION_MESSAGE);
                 }
             } 
             catch (NumberFormatException | SQLException e) 
@@ -271,56 +223,58 @@ public class TelaProdutoAlterar extends javax.swing.JFrame
         }
         else
         {
-            campoNomeAP.setText("");
-            campoNomeAP.setFocusable(false);
-            campoNomeAP.setEnabled(false);
+            campoNomeAVendedor.setText("");
+            campoNomeAVendedor.setFocusable(false);
+            campoNomeAVendedor.setEnabled(false);
 
-            campoTipoAP.setSelectedIndex(0);
-            campoTipoAP.setFocusable(false);
-            campoTipoAP.setEnabled(false);
-
-            campoPrecoAP.setText("");
-            campoPrecoAP.setFocusable(false);
-            campoPrecoAP.setEnabled(false);
-
-            campoDataAP.setText("");
-            campoDataAP.setFocusable(false);
-            campoDataAP.setEnabled(false);
-
-            campoDataAP.setText(LtpUtil.formatarData(produto.getDataPreco(), "dd/MM/yyyy"));
-            campoDataAP.setFocusable(false);
-            campoDataAP.setEnabled(false);
+            campoDataAVendedor.setText(LtpUtil.formatarData(vendedor.getDataCadVendedor(), "dd/MM/yyyy"));
+            campoDataAVendedor.setFocusable(false);
+            campoDataAVendedor.setEnabled(false);
 
             btnAlterarProduto.setEnabled(false);
             JOptionPane.showMessageDialog(this, "Código inválido!", "Erro", JOptionPane.INFORMATION_MESSAGE);
         }
 
         
-    }//GEN-LAST:event_campoCodAPActionPerformed
+    }//GEN-LAST:event_campoCodAVendedorActionPerformed
 
     public static void main(String args[]) 
     {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaVendedorAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         java.awt.EventQueue.invokeLater(() -> {
         });
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarProduto;
-    private javax.swing.JTextField campoCodAP;
-    private javax.swing.JTextField campoDataAP;
-    private javax.swing.JTextField campoNomeAP;
-    private javax.swing.JTextField campoPrecoAP;
-    private javax.swing.JComboBox<String> campoTipoAP;
+    private javax.swing.JTextField campoCodAVendedor;
+    private javax.swing.JTextField campoDataAVendedor;
+    private javax.swing.JTextField campoNomeAVendedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
     private String validarEntradas()
     {        
-        return Utilitarios.validarEntradas(campoNomeAP, campoTipoAP, campoPrecoAP);
+        return Utilitarios.validarEntradas(campoNomeAVendedor);
     }
+
+    private void setarMascaras() 
+    {
+       ghostText = new GhostText(campoCodAVendedor, "Entre com o código do vendedor que deseja alterar e aperte enter");
+    }
+
+    
+
 }

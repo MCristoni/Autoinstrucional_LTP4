@@ -1,6 +1,5 @@
 package util;
 
-import clientes.TelaCliente;
 import clientes.TelaClienteIncluir;
 import java.awt.Color;
 import java.awt.event.FocusEvent;

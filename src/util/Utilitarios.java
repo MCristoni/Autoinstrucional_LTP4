@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package util;
 
 import banco.BancoConexoes;
@@ -17,10 +12,6 @@ import javax.swing.JTextField;
 import produtos.BancoProduto;
 import utilitarios.LtpUtil;
 
-/**
- *
- * @author Matheus
- */
 public class Utilitarios 
 {
     public static String tirarFormatacaoTelefone(JTextField campoTelefone)
@@ -149,6 +140,19 @@ public class Utilitarios
     {
         Date data = descobrirDataDate();
         return LtpUtil.formatarData(data, "dd/MM/yyyy");
+    }
+    
+    public static String validarEntradas(JTextField campoNome)
+    {
+        String resp = "";
+        
+        //Valida Nome
+        if(campoNome.getText().equals("Campo obrigatório") || campoNome.getText().length() > 40 || campoNome.getText().trim().equals(""))
+        {            
+            resp += "Nome\n";
+        }
+        
+        return resp;
     }
     
     public static String validarEntradas(JTextField campoNome, JTextField campoEndereco, JTextField campoBairro, JTextField campoCidade, JComboBox<String> campoUf,

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clientes;
 
 import banco.BancoConexoes;
@@ -16,20 +11,16 @@ import util.GhostText;
 import util.Utilitarios;
 import utilitarios.LtpUtil;
 
-/**
- *
- * @author usuario
- */
 public class TelaClienteAlterar extends javax.swing.JFrame 
 {
     private Cliente cliente = null;
-    private ArrayList<String> uf;
+    private final GhostText ghostText;
+    private final ArrayList<String> uf;
     public TelaClienteAlterar() throws ParseException
     {
         initComponents();
         jPanel1.requestFocus();
-        GhostText ghostText = new GhostText(campoCodAC, "Entre com o código do cliente que deseja alterar e aperte enter");
-        
+        ghostText = new GhostText(campoCodAC, "Entre com o código do cliente que deseja alterar e aperte enter");
         uf = Utilitarios.inicializarComboBoxEstados();
         campoUfAC.setModel(new DefaultComboBoxModel(new Vector(uf)));
     }
@@ -92,7 +83,7 @@ public class TelaClienteAlterar extends javax.swing.JFrame
 
         jLabel9.setText("Email:");
 
-        jLabel10.setText("Data inclusão:");
+        jLabel10.setText("Data cadastro:");
 
         campoDataAC.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campoDataAC.setEnabled(false);
@@ -455,16 +446,8 @@ public class TelaClienteAlterar extends javax.swing.JFrame
         
     }//GEN-LAST:event_campoCodACActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) 
     {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -472,27 +455,10 @@ public class TelaClienteAlterar extends javax.swing.JFrame
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaClienteAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaClienteAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaClienteAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaClienteAlterar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() 
-        {
-            public void run() 
-            {
-                
-            }
+        java.awt.EventQueue.invokeLater(() -> {
         });
     }
     
